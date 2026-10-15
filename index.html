@@ -46,13 +46,13 @@
   /* blurred copy fills the sides; the full photo sits on top, uncropped */
   .hero::before{
     content:""; position:absolute; inset:-40px; z-index:-2;
-    background:url("weiyuan.png") center / cover no-repeat; filter:blur(28px) brightness(.75) saturate(1.1);
+    background:url("weiyuan.jpg") center / cover no-repeat; filter:blur(28px) brightness(.75) saturate(1.1);
   }
   .hero::after{
     content:""; position:absolute; inset:0; z-index:-1;
     background:
       linear-gradient(180deg, rgba(20,18,12,0) 55%, rgba(20,18,12,.6) 100%),
-      url("weiyuan.png") center / contain no-repeat;
+      url("weiyuan.jpg") center / contain no-repeat;
   }
   .hero-content{ padding:44px 40px; color:#fff; max-width:640px }
   .hero-content h1{ font-size:clamp(2.4rem,6vw,4.2rem); margin:0 0 14px; font-weight:800; text-wrap:balance }
@@ -189,6 +189,15 @@
     #travel .np-dot{ stroke:#e9e5d8 }
   }
   @media (max-width:560px){ #travel .np{ padding:18px 14px 14px } #travel .np-tip{ width:170px } }
+
+
+  /* Photo protection (deters casual saving/copying; see JS below) */
+  img, .hero, .bt-hero, .bt-travel, .frame, .tile, .np-tip, .lightbox{ -webkit-user-select:none; user-select:none; -webkit-touch-callout:none }
+  img{ pointer-events:none; -webkit-user-drag:none; user-drag:none }
+  #travel .tile .frame::after{ content:""; position:absolute; inset:0 }
+  #travel .lightbox .frame{ position:relative }
+  #travel .lightbox .frame::after{ content:""; position:absolute; inset:0 }
+  @media print{ img, .hero, .bt-hero, .bt-travel, .frame, .ab-photo{ display:none !important } }
 
   /* merged sections */
   .sec{ padding:32px 0 24px }
@@ -1144,6 +1153,19 @@
     g.appendChild(c);
   });
   document.addEventListener('click',hide);
+})();
+</script>
+<script>
+(function(){
+  var SEL='img,.hero,.bt-hero,.bt-travel,.frame,.tile,.np-tip,.lightbox';
+  document.addEventListener('contextmenu',function(e){ if(e.target.closest && e.target.closest(SEL)) e.preventDefault(); });
+  document.addEventListener('dragstart',function(e){ if(e.target.tagName==='IMG' || (e.target.closest && e.target.closest(SEL))) e.preventDefault(); });
+  document.addEventListener('copy',function(e){
+    try{ var s=window.getSelection(); if(s && s.rangeCount && s.getRangeAt(0).cloneContents().querySelector('img')) e.preventDefault(); }catch(_){}
+  });
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey) && (e.key==='s'||e.key==='S') && document.activeElement && document.activeElement.closest && document.activeElement.closest(SEL)) e.preventDefault();
+  });
 })();
 </script>
 <script>

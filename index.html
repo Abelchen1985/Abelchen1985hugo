@@ -93,35 +93,65 @@
   footer{ text-align:center; color:var(--muted); font-size:.85rem; padding:0 0 48px }
 
 
-  /* About (redesigned) */
-  .ab{ padding:8px 0 56px }
-  .ab-photo{
-    width:100%; aspect-ratio:21/9; min-height:300px; max-height:64vh; border-radius:22px; box-shadow:var(--shadow);
-    background:linear-gradient(180deg, rgba(20,18,12,0) 60%, rgba(20,18,12,.35) 100%), url("about.jpg") 58% 42% / cover no-repeat;
+  /* About: bento grid */
+  .bt{ display:grid; grid-template-columns:repeat(12,1fr); gap:16px; padding:8px 0 56px }
+  .bt-tile{
+    position:relative; border-radius:22px; padding:28px; overflow:hidden;
+    background:var(--card); border:1px solid var(--border); box-shadow:var(--shadow);
+    opacity:0; transform:translateY(14px); animation:btIn .6s cubic-bezier(.2,.7,.2,1) forwards;
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .bt-tile:nth-child(2){ animation-delay:.08s } .bt-tile:nth-child(3){ animation-delay:.16s }
+  .bt-tile:nth-child(4){ animation-delay:.24s } .bt-tile:nth-child(5){ animation-delay:.3s }
+  .bt-tile:nth-child(6){ animation-delay:.36s } .bt-tile:nth-child(7){ animation-delay:.42s } .bt-tile:nth-child(8){ animation-delay:.48s }
+  @keyframes btIn{ to{ opacity:1; transform:none } }
+  @media (prefers-reduced-motion:reduce){ .bt-tile{ animation:none; opacity:1; transform:none } }
+  a.bt-tile:hover{ transform:translateY(-4px) } a.bt-tile:hover .bt-go{ transform:translate(3px,-3px) }
+
+  .bt-hero{
+    grid-column:span 12; min-height:clamp(340px,52vh,560px); display:flex; align-items:flex-end; padding:0; border:0;
+    background:linear-gradient(180deg, rgba(14,13,10,0) 30%, rgba(14,13,10,.78) 100%), url("about.jpg") 58% 42% / cover no-repeat;
     -webkit-user-select:none; user-select:none; -webkit-touch-callout:none;
   }
-  .ab-body{ display:grid; grid-template-columns:minmax(0,1.7fr) minmax(0,1fr); gap:48px; margin-top:-56px; position:relative; padding:0 28px }
-  @media (max-width:860px){ .ab-body{ grid-template-columns:1fr; gap:24px; padding:0; margin-top:24px } }
-  .ab-main{
-    background:var(--card); border:1px solid var(--border); border-radius:20px; box-shadow:var(--shadow);
-    padding:40px 44px 44px; min-height:360px;
+  .bt-hero-text{ padding:44px 48px; color:#fff; max-width:760px }
+  .bt-kicker{ font-size:.78rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; margin:0 0 10px; color:rgba(255,255,255,.8) }
+  .bt-hero h2{ font-size:clamp(2.4rem,6.4vw,4.6rem); line-height:1.02; margin:0 0 14px; font-weight:800 }
+  .bt-sub{ font-size:1.1rem; margin:0; max-width:48ch; color:rgba(255,255,255,.88) }
+
+  .bt-story{ grid-column:span 7; grid-row:span 2; padding:38px 42px; min-height:380px }
+  .bt-story p{ margin:0 0 16px; line-height:1.75; font-size:1.05rem; max-width:62ch }
+  .bt-lead{ font-family:"Fraunces",Georgia,serif; font-size:1.45rem !important; line-height:1.45 !important; font-weight:600 }
+  .bt-hint{ color:var(--muted); font-size:.85rem !important; border-top:1px dashed var(--border); padding-top:14px; margin-top:26px !important }
+  .bt-label{ font-size:.75rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--clay); margin:0 0 14px }
+
+  .bt-now{ grid-column:span 5 }
+  .bt-now ul{ list-style:none; margin:0; padding:0 }
+  .bt-now li{ display:flex; flex-direction:column; gap:2px; padding:12px 0; border-bottom:1px solid var(--border) }
+  .bt-now li:last-child{ border-bottom:0; padding-bottom:0 }
+  .bt-now b{ font-size:.8rem; letter-spacing:.04em; text-transform:uppercase }
+  .bt-now span{ color:var(--muted); font-size:.95rem }
+
+  .bt-small{ grid-column:span 4; min-height:190px; display:flex; flex-direction:column; justify-content:flex-end; color:#fff; border:0 }
+  .bt-small .bt-name{ font-family:"Fraunces",Georgia,serif; font-weight:700; font-size:1.5rem; margin:10px 0 0; line-height:1.15 }
+  .bt-small .bt-note{ margin:2px 0 0; font-size:.85rem; opacity:.85 }
+  .bt-small svg:first-child{ position:absolute; top:24px; left:26px }
+  .bt-small .bt-go{ position:absolute; top:24px; right:24px; left:auto; transition:transform .25s ease }
+  .bt-ball{ background:linear-gradient(135deg,#c2663d,#8f3b22) }
+  .bt-film{ background:linear-gradient(135deg,#3b4a5a,#1f2a35) }
+  .bt-travel{ background:linear-gradient(180deg, rgba(14,13,10,.1), rgba(14,13,10,.7)), url("yosemite.jpg") center / cover }
+  .bt-study{ background:linear-gradient(135deg,#5d6f4b,#3a4730) }
+  .bt-cv{ background:linear-gradient(135deg,#8a6a2f,#5a4318) }
+  .bt-pair{ grid-column:span 5; display:grid; grid-template-columns:1fr 1fr; gap:16px }
+  .bt-pair .bt-small{ grid-column:auto !important; min-height:200px }
+  .bt-pair .bt-small .bt-name{ font-size:1.3rem }
+
+  @media (max-width:900px){
+    .bt-story,.bt-now{ grid-column:span 12; grid-row:auto }
+    .bt-small{ grid-column:span 6 !important }
+    .bt-pair{ grid-column:span 12 }
+    .bt-hero-text{ padding:28px 24px }
   }
-  @media (max-width:560px){ .ab-main{ padding:28px 22px } }
-  .ab .kicker{ font-size:.8rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--clay); margin:0 0 8px }
-  .ab h2{ font-size:clamp(2rem,4.6vw,3rem); line-height:1.1; margin:0 0 22px }
-  .ab-story p{ margin:0 0 16px; font-size:1.05rem; line-height:1.75; color:var(--ink); max-width:62ch }
-  .ab-story .ab-lead{ font-family:"Fraunces",Georgia,serif; font-size:1.35rem; line-height:1.5; font-weight:600 }
-  .ab-story .ab-hint{ color:var(--muted); font-size:.85rem; border-top:1px dashed var(--border); padding-top:14px; margin-top:26px }
-  .ab-side{ display:flex; flex-direction:column; gap:18px; padding-top:72px }
-  @media (max-width:860px){ .ab-side{ padding-top:0 } }
-  .ab-card{ background:var(--card); border:1px solid var(--border); border-radius:18px; padding:22px 24px; box-shadow:var(--shadow) }
-  .ab-card-soft{ background:transparent; box-shadow:none; border-style:dashed }
-  .ab-card-title{ font-size:.75rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--clay); margin:0 0 12px }
-  .ab-facts{ list-style:none; margin:0; padding:0 }
-  .ab-facts li{ display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); font-weight:600 }
-  .ab-facts li:last-child{ border-bottom:0 }
-  .ab-facts span{ color:var(--muted); font-weight:500 }
-  .ab-muted{ color:var(--muted); font-size:.92rem; margin:0 }
+  @media (max-width:520px){ .bt-small{ grid-column:span 12 !important } .bt-pair{ grid-template-columns:1fr } .bt-story{ padding:28px 22px } }
 
   /* merged sections */
   .sec{ padding:32px 0 24px }
@@ -366,38 +396,42 @@
   </div>
 
   <div class="view" id="view-about">
-    <div class="ab" id="about">
-      <div class="ab-photo" oncontextmenu="return false" role="img" aria-label="Milky Way over the desert"></div>
+    <div class="bt" id="about">
 
-      <div class="ab-body">
-        <div class="ab-main">
-          <p class="kicker">About</p>
+      <!-- Hero tile: photo with headline on top -->
+      <div class="bt-tile bt-hero" oncontextmenu="return false">
+        <div class="bt-hero-text">
+          <p class="bt-kicker">About</p>
           <h2 class="serif">Who is Weiyuan?</h2>
-
-          <!-- ✏️ WRITE YOUR STORY HERE: replace the placeholder box below with your own paragraphs
-               (use <p class="ab-lead"> for the first line and plain <p> for the rest). -->
-          <div class="ab-story">
-            <p class="ab-lead">Your opening line goes here, one or two sentences that sum you up.</p>
-            <p>Your story goes here: where you're from, what you do, what you're working toward, and what you do for fun. A few short paragraphs is plenty.</p>
-            <p class="ab-hint">Placeholder text. Send me your bio and I'll replace it.</p>
-          </div>
+          <p class="bt-sub">Basketball on the weekends, movies on repeat, and always planning the next trip.</p>
         </div>
-
-        <aside class="ab-side">
-          <div class="ab-card">
-            <p class="ab-card-title">Quick facts</p>
-            <ul class="ab-facts">
-              <li><span>Plays</span>Basketball</li>
-              <li><span>Watches</span>Movies</li>
-              <li><span>Loves</span>Travel</li>
-            </ul>
-          </div>
-          <div class="ab-card ab-card-soft">
-            <p class="ab-card-title">Elsewhere</p>
-            <p class="ab-muted">Links and contact details can go here once you've picked which to share.</p>
-          </div>
-        </aside>
       </div>
+
+      <!-- ✏️ WRITE YOUR STORY HERE: edit the text inside this tile. Use <p class="bt-lead"> for the opening line. -->
+      <div class="bt-tile bt-story">
+        <p class="bt-label">My story</p>
+        <p class="bt-lead">Your opening line goes here, one or two sentences that sum you up.</p>
+        <p>Where you're from, what you do, what you're working toward and what you do for fun. A few short paragraphs fits nicely in this space.</p>
+        <p class="bt-hint">Placeholder text. Send me your bio and I'll replace it.</p>
+      </div>
+
+      <div class="bt-tile bt-now">
+        <p class="bt-label">Right now</p>
+        <ul>
+          <li><b>Working on</b><span>Add what you're building or doing these days</span></li>
+          <li><b>Learning</b><span>Add what you're studying</span></li>
+          <li><b>Next trip</b><span>Add where you're headed</span></li>
+        </ul>
+      </div>
+
+      <div class="bt-pair">
+      <div class="bt-tile bt-small bt-half bt-ball"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18M5.6 5.6c2.8 2.8 2.8 10 0 12.8M18.4 5.6c-2.8 2.8-2.8 10 0 12.8"/></svg><p class="bt-name">Basketball</p><p class="bt-note">Weekend hoops</p></div>
+      <div class="bt-tile bt-small bt-half bt-film"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18M8 5v4M16 5v4"/></svg><p class="bt-name">Movies</p><p class="bt-note">Always a watchlist</p></div>
+      </div>
+
+      <a class="bt-tile bt-small bt-travel" href="#travel"><svg class="bt-go" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg><p class="bt-name">Travel</p><p class="bt-note">See the album</p></a>
+      <a class="bt-tile bt-small bt-study" href="#study-plan"><svg class="bt-go" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg><p class="bt-name">Study Plan</p><p class="bt-note">What I'm learning</p></a>
+      <a class="bt-tile bt-small bt-cv" href="#cv"><svg class="bt-go" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg><p class="bt-name">CV</p><p class="bt-note">Education &amp; experience</p></a>
     </div>
   </div>
 

@@ -110,7 +110,7 @@
 
   .bt-hero{
     grid-column:span 12; min-height:clamp(340px,52vh,560px); display:flex; align-items:flex-end; padding:0; border:0;
-    background:linear-gradient(180deg, rgba(14,13,10,0) 30%, rgba(14,13,10,.78) 100%), url("about.jpg") 58% 42% / cover no-repeat;
+    background:linear-gradient(180deg, rgba(14,13,10,0) 65%, rgba(14,13,10,.25) 100%), url("about.jpg") 58% 42% / cover no-repeat;
     -webkit-user-select:none; user-select:none; -webkit-touch-callout:none;
   }
   .bt-hero-text{ padding:44px 48px; color:#fff; max-width:760px }
@@ -122,6 +122,7 @@
   .bt-story p{ margin:0 0 16px; line-height:1.75; font-size:1.05rem; max-width:62ch }
   .bt-lead{ font-family:"Fraunces",Georgia,serif; font-size:1.45rem !important; line-height:1.45 !important; font-weight:600 }
   .bt-hint{ color:var(--muted); font-size:.85rem !important; border-top:1px dashed var(--border); padding-top:14px; margin-top:26px !important }
+  .bt-title{ font-size:clamp(2rem,4.4vw,3rem); line-height:1.08; margin:0 0 20px }
   .bt-label{ font-size:.75rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--clay); margin:0 0 14px }
 
   .bt-now{ grid-column:span 5 }
@@ -399,17 +400,12 @@
     <div class="bt" id="about">
 
       <!-- Hero tile: photo with headline on top -->
-      <div class="bt-tile bt-hero" oncontextmenu="return false">
-        <div class="bt-hero-text">
-          <p class="bt-kicker">About</p>
-          <h2 class="serif">Who is Weiyuan?</h2>
-          <p class="bt-sub">Basketball on the weekends, movies on repeat, and always planning the next trip.</p>
-        </div>
-      </div>
+      <div class="bt-tile bt-hero" oncontextmenu="return false" role="img" aria-label="Milky Way over the desert"></div>
 
       <!-- ✏️ WRITE YOUR STORY HERE: edit the text inside this tile. Use <p class="bt-lead"> for the opening line. -->
       <div class="bt-tile bt-story">
-        <p class="bt-label">My story</p>
+        <p class="bt-label">About</p>
+        <h2 class="serif bt-title">Who is Weiyuan?</h2>
         <p class="bt-lead">Your opening line goes here, one or two sentences that sum you up.</p>
         <p>Where you're from, what you do, what you're working toward and what you do for fun. A few short paragraphs fits nicely in this space.</p>
         <p class="bt-hint">Placeholder text. Send me your bio and I'll replace it.</p>
@@ -429,9 +425,6 @@
       <div class="bt-tile bt-small bt-half bt-film"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18M8 5v4M16 5v4"/></svg><p class="bt-name">Movies</p><p class="bt-note">Always a watchlist</p></div>
       </div>
 
-      <a class="bt-tile bt-small bt-travel" href="#travel"><svg class="bt-go" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg><p class="bt-name">Travel</p><p class="bt-note">See the album</p></a>
-      <a class="bt-tile bt-small bt-study" href="#study-plan"><svg class="bt-go" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg><p class="bt-name">Study Plan</p><p class="bt-note">What I'm learning</p></a>
-      <a class="bt-tile bt-small bt-cv" href="#cv"><svg class="bt-go" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg><p class="bt-name">CV</p><p class="bt-note">Education &amp; experience</p></a>
     </div>
   </div>
 

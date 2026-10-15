@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Your Name — study plan.">
+<title>Study Plan — Your Name</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6f3ec; --card:#ffffff; --ink:#221f1a; --muted:#6c655b;
+    --olive:#4c5b3e; --clay:#b5563a; --amber:#c98a2c; --slate:#5c6b78; --border:#e6e0d2;
+    --track:#e6e0d2;
+    --shadow:0 2px 4px rgba(34,31,26,.06), 0 20px 40px -20px rgba(34,31,26,.3);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#18170f; --card:#211f17; --ink:#efe9dd; --muted:#a89f8e;
+      --olive:#8fa878; --clay:#e08361; --amber:#e3ac5b; --slate:#93a6b5; --border:#332f24;
+      --track:#332f24;
+      --shadow:0 2px 4px rgba(0,0,0,.4), 0 20px 40px -20px rgba(0,0,0,.6);
+    }
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{ background:var(--bg); color:var(--ink); font-family:"Inter",system-ui,sans-serif; line-height:1.6; -webkit-font-smoothing:antialiased }
+  a{ color:inherit; text-decoration:none }
+  .serif{ font-family:"Fraunces",Georgia,serif }
+  .mono{ font-family:"IBM Plex Mono",monospace }
+  .wrap{ max-width:920px; margin:0 auto; padding:0 24px 96px }
+
+  nav{ display:flex; align-items:center; justify-content:space-between; padding:22px 0; flex-wrap:wrap; gap:10px }
+  .brand{ font-family:"Fraunces",serif; font-weight:800; font-size:1.3rem }
+  .navlinks{ display:flex; gap:24px; font-size:.85rem; font-weight:600; letter-spacing:.04em; text-transform:uppercase }
+  .navlinks a:hover{ color:var(--clay) }
+  @media (max-width:700px){ .navlinks{ display:none } }
+
+  .head{ padding:28px 0 32px; border-bottom:1px solid var(--border) }
+  .head h1{ font-size:clamp(2rem,5vw,2.8rem); margin:0 0 8px }
+  .head p{ color:var(--muted); margin:0; max-width:62ch }
+
+  section{ padding:40px 0; border-bottom:1px solid var(--border) }
+  section:last-of-type{ border-bottom:none }
+  .kicker{ font-size:.8rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--clay); margin:0 0 6px }
+  .section-sub{ color:var(--muted); font-size:.92rem; margin:0 0 20px }
+
+  /* Progress */
+  .progress-card{
+    background:var(--card); border:1px solid var(--border); border-radius:14px;
+    box-shadow:var(--shadow); padding:22px 24px; display:flex; align-items:center; gap:24px; flex-wrap:wrap;
+  }
+  .ring{ width:72px; height:72px; border-radius:50%; flex-shrink:0;
+    background:conic-gradient(var(--olive) calc(var(--pct,0)*1%), var(--track) 0);
+    display:flex; align-items:center; justify-content:center; }
+  .ring-inner{ width:56px; height:56px; border-radius:50%; background:var(--card);
+    display:flex; align-items:center; justify-content:center; font-weight:700; font-size:.95rem; }
+  .progress-text{ flex:1; min-width:200px }
+  .progress-text .big{ font-size:1.15rem; font-weight:600 }
+  .progress-text .small{ color:var(--muted); font-size:.85rem; margin-top:2px }
+  .tier-counts{ display:flex; gap:14px; flex-wrap:wrap; font-size:.78rem; color:var(--muted) }
+  .tier-counts b{ color:var(--ink) }
+
+  /* Table */
+  table{ width:100%; border-collapse:collapse; font-size:.9rem; margin-top:24px }
+  th{ text-align:left; font-size:.7rem; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); font-weight:600; padding:0 10px 10px; border-bottom:1px solid var(--border) }
+  td{ padding:12px 10px; border-bottom:1px solid var(--border); vertical-align:top }
+  tr:last-child td{ border-bottom:none }
+  tr.done td{ opacity:.55 }
+  tr.done .course{ text-decoration:line-through }
+  td.num{ color:var(--muted); font-variant-numeric:tabular-nums; width:26px }
+  .course{ font-weight:600 }
+  .subject{ color:var(--muted); font-size:.85rem; margin-top:2px }
+  .subject .alt{ color:var(--muted) }
+  .subject .alt a{ color:var(--olive); font-weight:600 }
+  .subject .alt a:hover{ color:var(--clay) }
+  .pill{ font-size:.7rem; font-weight:700; letter-spacing:.02em; padding:4px 10px; border-radius:999px; white-space:nowrap; border:1px solid transparent }
+  .pill.must{ color:#fff; background:var(--clay) }
+  .pill.strong{ color:#fff; background:var(--amber) }
+  .pill.useful{ color:#fff; background:var(--slate) }
+  .pill.optional{ color:var(--muted); border-color:var(--border) }
+  td.check{ text-align:center; width:40px }
+  input[type=checkbox]{ width:18px; height:18px; accent-color:var(--olive); cursor:pointer }
+
+  .plan-note{
+    background:var(--card); border:1px solid var(--border); border-radius:14px;
+    box-shadow:var(--shadow); padding:22px 24px; margin-top:28px; font-size:.92rem;
+  }
+  .plan-note h3{ font-family:"Fraunces",serif; font-size:1.05rem; margin:0 0 10px }
+  .plan-note ol{ margin:0; padding-left:20px; display:flex; flex-direction:column; gap:8px }
+  .plan-note .phase-label{ font-weight:600 }
+  .plan-note .phase-courses{ color:var(--muted) }
+
+  .pending{
+    border:1.5px dashed var(--border); border-radius:12px; padding:18px 20px;
+    color:var(--muted); font-size:.92rem;
+  }
+  .pending strong{ color:var(--ink) }
+
+  /* Track tabs */
+  .tabs{ display:flex; gap:10px; padding:28px 0 0; flex-wrap:wrap }
+  .tab-btn{
+    font-family:"Inter",sans-serif; font-weight:600; font-size:.88rem; letter-spacing:.01em;
+    padding:10px 20px; border-radius:999px; border:1px solid var(--border);
+    background:var(--card); color:var(--muted); cursor:pointer;
+  }
+  .tab-btn.active{ background:var(--olive); border-color:var(--olive); color:#fff }
+  .track{ display:none }
+  .track.active{ display:block }
+  .track-head{ padding:24px 0 8px }
+  .track-head p{ color:var(--muted); margin:0; max-width:62ch }
+
+  /* Domain sub-tabs (nested under DV track) */
+  .subtabs{ display:flex; gap:8px; padding:4px 0 0; flex-wrap:wrap }
+  .subtab-btn{
+    font-family:"Inter",sans-serif; font-weight:600; font-size:.82rem;
+    padding:8px 16px; border-radius:999px; border:1px solid var(--border);
+    background:var(--card); color:var(--muted); cursor:pointer;
+  }
+  .subtab-btn.active{ background:var(--clay); border-color:var(--clay); color:#fff }
+  .domain-panel{ display:none }
+  .domain-panel.active{ display:block }
+
+  /* Company IP-block reference */
+  .company-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:20px }
+  @media (max-width:700px){ .company-grid{ grid-template-columns:1fr } }
+  .company-card{
+    background:var(--card); border:1px solid var(--border); border-radius:14px;
+    box-shadow:var(--shadow); padding:22px 24px;
+  }
+  .company-card h3{ font-family:"Fraunces",serif; font-size:1.1rem; margin:0 0 14px }
+  .ip-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:12px }
+  .ip-list li{ font-size:.9rem; border-bottom:1px solid var(--border); padding-bottom:12px }
+  .ip-list li:last-child{ border-bottom:none; padding-bottom:0 }
+  .ip-list a{ color:var(--ink); font-weight:600 }
+  .ip-list a:hover{ color:var(--clay) }
+  .ip-list span.plain{ font-weight:600 }
+  .ip-note{ color:var(--muted); font-size:.82rem; display:block; margin-top:2px }
+
+  footer{ text-align:center; color:var(--muted); font-size:.85rem; padding-top:32px }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav>
+    <span class="brand">Your Name</span>
+    <div class="navlinks">
+      <a href="index.html">Home</a>
+      <a href="cv.html">CV</a>
+      <a href="study-plan.html">Study Plan</a>
+      <a href="travel.html">Travel</a>
+    </div>
+  </nav>
+
+  <div class="head">
+    <h1 class="serif">Study Plan</h1>
+    <p>Self-study roadmaps built from public university courses, alongside my official coursework.</p>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn" data-track="ee">EE / Hardware</button>
+    <button class="tab-btn" data-track="ai">AI / ML</button>
+    <button class="tab-btn" data-track="dv">DV</button>
+    <button class="tab-btn" data-track="rtl">RTL Design</button>
+  </div>
+
+  <div class="track" id="track-ee">
+    <div class="track-head"><p>Computer architecture and digital systems, from MIT OpenCourseWare.</p></div>
+
+    <section>
+      <p class="kicker">Progress</p>
+      <div class="progress-card">
+        <div class="ring" id="ring-ee" style="--pct:0"><div class="ring-inner" id="ring-label-ee">0%</div></div>
+        <div class="progress-text">
+          <div class="big" id="progress-summary-ee">0 of 13 courses complete</div>
+          <div class="small">Check off a course below as you finish it — saved in your browser, private to you.</div>
+        </div>
+        <div class="tier-counts" id="tier-counts-ee"></div>
+      </div>
+    </section>
+
+    <section>
+      <p class="kicker">Self-study roadmap</p>
+      <p class="section-sub">MIT OpenCourseWare, ordered by priority for computer architecture / digital hardware depth.</p>
+      <table>
+        <thead><tr><th></th><th>#</th><th>Course</th><th>Priority</th></tr></thead>
+        <tbody id="course-table-ee"></tbody>
+      </table>
+    </section>
+
+    <section>
+      <p class="kicker">Suggested sequencing</p>
+      <p class="section-sub">My take on an order that builds cleanly on itself, if you want one beyond the priority ranking.</p>
+      <div class="plan-note">
+        <h3>Four phases</h3>
+        <ol>
+          <li><span class="phase-label">1. Foundations</span> — <span class="phase-courses">6.002 → 6.003 (optional, only if signals/frequency-domain math feels shaky) → 6.004</span></li>
+          <li><span class="phase-label">2. Digital systems core</span> — <span class="phase-courses">6.111 → 6.012 → 6.823</span>. 6.111 gives you the RTL/FPGA hands-on skill before 6.823's architecture theory lands on solid ground; 6.012 device physics is worth having before VLSI.</li>
+          <li><span class="phase-label">3. Silicon depth</span> — <span class="phase-courses">6.374 → 6.884</span>. This is where it gets specialized — 6.374 first, 6.884 only if you want to go deep on large-scale CMOS/VLSI specifically.</li>
+          <li><span class="phase-label">4. Systems & software adjacency</span> — <span class="phase-courses">6.1810 → 6.189 → 6.033 → 6.883 → 6.006</span>, roughly in that order, picked up opportunistically rather than as a hard block.</li>
+        </ol>
+      </div>
+      <div class="plan-note" style="margin-top:16px">
+        <h3>A few thoughts</h3>
+        <ol>
+          <li><strong>6.004 before 6.111</strong> — digital logic fundamentals make the FPGA lab much less painful, even though both are marked Must.</li>
+          <li><strong>6.012 before 6.374</strong> — device physics helps the "why" behind CMOS timing/power tradeoffs land, not just the "how."</li>
+          <li><strong>6.006 (algorithms)</strong> is low priority here, but a light pass pays off for 6.823 (cache/OoO analysis) and 6.883 (program analysis).</li>
+          <li>Workload varies a lot — 6.002/6.111 are substantial with labs, 6.189 is a short primer. Say the word and I'll add an hours-estimate column.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section>
+      <p class="kicker">Official coursework</p>
+      <div class="pending"><strong>Course list pending.</strong> Send your actual for-credit course list (term, course number/name, status) and I'll add it as its own table, separate from self-study.</div>
+    </section>
+  </div>
+
+  <div class="track" id="track-ai">
+    <div class="track-head"><p>Machine learning and AI systems, anchored on the agents course you flagged, from Stanford's public course catalog (CS 329Z is a genuinely new — Fall 2025 — Stanford course; there's no official "AI 101"-style numbering the way EE has 6.xxx, so this list is curated rather than pulled from one program).</p></div>
+
+    <section>
+      <p class="kicker">Progress</p>
+      <div class="progress-card">
+        <div class="ring" id="ring-ai" style="--pct:0"><div class="ring-inner" id="ring-label-ai">0%</div></div>
+        <div class="progress-text">
+          <div class="big" id="progress-summary-ai">0 of 9 courses complete</div>
+          <div class="small">Check off a course below as you finish it — saved in your browser, private to you.</div>
+        </div>
+        <div class="tier-counts" id="tier-counts-ai"></div>
+      </div>
+    </section>
+
+    <section>
+      <p class="kicker">Self-study roadmap</p>
+      <p class="section-sub">Stanford public courses, prioritized toward LLMs and AI agents specifically since that's what CS 329Z points at.</p>
+      <table>
+        <thead><tr><th></th><th>#</th><th>Course</th><th>Priority</th></tr></thead>
+        <tbody id="course-table-ai"></tbody>
+      </table>
+    </section>
+
+    <section>
+      <p class="kicker">Suggested sequencing</p>
+      <p class="section-sub">My take on an order, if you want one beyond the priority ranking.</p>
+      <div class="plan-note">
+        <h3>Three phases</h3>
+        <ol>
+          <li><span class="phase-label">1. Foundations</span> — <span class="phase-courses">CS229 → CS230</span>. Classical ML first, then deep learning — CS230 assumes the CS229 vocabulary (loss functions, optimization, bias/variance).</li>
+          <li><span class="phase-label">2. Language & sequence models</span> — <span class="phase-courses">CS224N → CS25 → CS324</span>. NLP fundamentals, then the Transformers United seminar as a fast high-level map, then LLMs in depth.</li>
+          <li><span class="phase-label">3. Agents & specialization</span> — <span class="phase-courses">CS329Z → CS234 → CS231N → CS236</span>. Agents is the target course; RL (CS234) matters for RLHF/agent training; vision (CS231N) and generative models (CS236) are optional depth, useful mainly if you go multimodal.</li>
+        </ol>
+      </div>
+      <div class="plan-note" style="margin-top:16px">
+        <h3>A few thoughts</h3>
+        <ol>
+          <li><strong>CS229 first, even though it's the "boring" one</strong> — CS230 and CS324 both lean on it, and skipping it tends to show up later as gaps in understanding why models train the way they do.</li>
+          <li><strong>CS25 (Transformers United)</strong> is a seminar, not a full course — light workload, high value as an overview before CS324 and CS329Z, worth doing even out of order.</li>
+          <li><strong>CS329Z is brand new</strong> (Fall 2025) — lecture materials may still be filling in as the term runs, so check <a href="https://cs329z.stanford.edu/" target="_blank" rel="noopener">cs329z.stanford.edu</a> directly for current availability rather than relying on this list alone.</li>
+          <li>I marked CS231N (vision) and CS236 (generative models) Optional since your ask was agents/LLMs specifically — flag it if multimodal or generative work is actually a goal and I'll bump their priority.</li>
+          <li>None of these are MIT OCW-style fully-open courseware — most Stanford CS lecture notes/slides/assignments are public, but a few materials are enrollment-gated. Worth noting if this page is meant to track "what I can access for free" vs. "what I'm aiming to learn."</li>
+        </ol>
+      </div>
+    </section>
+
+    <section>
+      <p class="kicker">Official coursework</p>
+      <div class="pending"><strong>Course list pending.</strong> Send your actual for-credit course list and I'll add it here too, separate from self-study.</div>
+    </section>
+  </div>
+
+  <div class="track" id="track-dv">
+    <div class="track-head"><p>Design verification for IP blocks — a shared core of UVM methodology, fundamental to advanced, plus a domain tab you pick for IP-specific knowledge (data fabric/CXL, or graphics/GPU), matching real Sr. DV Engineer postings (e.g. AMD Austin). Unlike the EE and AI tracks, most of this isn't university coursework at all — it's industry-standard training and standards-body material, since that's how verification is actually taught.</p></div>
+
+    <section>
+      <p class="kicker">Progress — core methodology</p>
+      <div class="progress-card">
+        <div class="ring" id="ring-dv-core" style="--pct:0"><div class="ring-inner" id="ring-label-dv-core">0%</div></div>
+        <div class="progress-text">
+          <div class="big" id="progress-summary-dv-core">0 of 10 courses complete</div>
+          <div class="small">Check off a course below as you finish it — saved in your browser, private to you.</div>
+        </div>
+        <div class="tier-counts" id="tier-counts-dv-core"></div>
+      </div>
+    </section>
+
+    <section>
+      <p class="kicker">Core self-study roadmap</p>
+      <p class="section-sub">Architecture prerequisites plus verification methodology and modeling, listed fundamental → advanced. Applies regardless of which IP domain you specialize into — the first three overlap with the EE track, included here since they're a real prerequisite for DV specifically, not just nice-to-have.</p>
+      <table>
+        <thead><tr><th></th><th>#</th><th>Course</th><th>Priority</th></tr></thead>
+        <tbody id="course-table-dv-core"></tbody>
+      </table>
+    </section>
+
+    <section>
+      <p class="kicker">Domain specialization</p>
+      <p class="section-sub">Pick a domain to go deep on — each has its own fundamental → advanced roadmap and its own progress tracker.</p>
+      <div class="subtabs">
+        <button class="subtab-btn" data-domain="fabric">Data Fabric IP</button>
+        <button class="subtab-btn" data-domain="graphics">Graphics IP</button>
+      </div>
+
+      <div class="domain-panel" id="domain-fabric">
+        <div class="progress-card" style="margin-top:20px">
+          <div class="ring" id="ring-dv-fabric" style="--pct:0"><div class="ring-inner" id="ring-label-dv-fabric">0%</div></div>
+          <div class="progress-text">
+            <div class="big" id="progress-summary-dv-fabric">0 of 4 courses complete</div>
+            <div class="small">CXL, interconnect, and coherency domain knowledge.</div>
+          </div>
+          <div class="tier-counts" id="tier-counts-dv-fabric"></div>
+        </div>
+        <table>
+          <thead><tr><th></th><th>#</th><th>Course</th><th>Priority</th></tr></thead>
+          <tbody id="course-table-dv-fabric"></tbody>
+        </table>
+      </div>
+
+      <div class="domain-panel" id="domain-graphics">
+        <div class="progress-card" style="margin-top:20px">
+          <div class="ring" id="ring-dv-graphics" style="--pct:0"><div class="ring-inner" id="ring-label-dv-graphics">0%</div></div>
+          <div class="progress-text">
+            <div class="big" id="progress-summary-dv-graphics">0 of 2 courses complete</div>
+            <div class="small">Graphics pipeline and GPU architecture domain knowledge.</div>
+          </div>
+          <div class="tier-counts" id="tier-counts-dv-graphics"></div>
+        </div>
+        <table>
+          <thead><tr><th></th><th>#</th><th>Course</th><th>Priority</th></tr></thead>
+          <tbody id="course-table-dv-graphics"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <p class="kicker">IP blocks in the job market</p>
+      <p class="section-sub">A snapshot of DV openings by IP block, pulled from each company's own careers site (Sept 2026) — not an exhaustive count, but shows where demand actually clusters.</p>
+      <div class="company-grid">
+        <div class="company-card">
+          <h3>AMD</h3>
+          <ul class="ip-list">
+            <li><a href="https://jobs.amd.com/job/Austin-Design-Verification-Engineer-Graphics-IP-183227-Texa/935309500/" target="_blank" rel="noopener">Graphics IP</a><span class="ip-note">Austin — matches the Graphics IP domain tab above</span></li>
+            <li><span class="plain">CPU / CPU Core</span><span class="ip-note">Multiple open reqs — Bangalore, Cambridge, Boxborough, Fishkill; includes a "Core Enablement" variant</span></li>
+            <li><a href="https://zapply.jobs/jobs/9d4ac799-ceb7-4b50-a3cf-590a2ec48635/" target="_blank" rel="noopener">Memory Controller</a><span class="ip-note">Lead-level, San Jose</span></li>
+            <li><span class="plain">Memory Subsystem</span><span class="ip-note">Austin</span></li>
+            <li><a href="https://careers.amd.com/careers-home/jobs/89120?lang=en-us" target="_blank" rel="noopener">PCIe</a><span class="ip-note">Staff-level, Cork, Ireland</span></li>
+            <li><a href="https://www.linkedin.com/jobs/view/infinity-fabric-verification-engineer-at-amd-3551103056" target="_blank" rel="noopener">Infinity Fabric</a><span class="ip-note">AMD's proprietary interconnect — closest thing to a CXL/data-fabric role; Santa Clara</span></li>
+            <li><a href="https://careers.amd.com/careers-home/jobs/80797?lang=en-us" target="_blank" rel="noopener">Formal verification</a><span class="ip-note">Cross-cutting methodology, not one IP block — Austin</span></li>
+            <li><span class="plain">General ASIC / SoC</span><span class="ip-note">Not tied to a named block — most common posting type, including the one you originally found</span></li>
+          </ul>
+        </div>
+        <div class="company-card">
+          <h3>NVIDIA</h3>
+          <ul class="ip-list">
+            <li><a href="https://jobs.nvidia.com/careers/job/893395449453" target="_blank" rel="noopener">GPU core / GPU Fullchip</a><span class="ip-note">Matches the Graphics IP domain tab above</span></li>
+            <li><a href="https://nvidia.eightfold.ai/careers/job/893394750744" target="_blank" rel="noopener">GPU Memory Subsystem</a><span class="ip-note">Senior-level</span></li>
+            <li><a href="https://jobs.nvidia.com/careers/job/893396268624" target="_blank" rel="noopener">Memory Controller</a><span class="ip-note">Senior-level, general (not GPU-specific)</span></li>
+            <li><a href="https://jobs.nvidia.com/careers/job/893394864388" target="_blank" rel="noopener">Memory Subsystem</a><span class="ip-note">Senior-level, general</span></li>
+            <li><a href="https://jobs.nvidia.com/careers/job/893393647441" target="_blank" rel="noopener">CPU</a><span class="ip-note">Their Grace CPU line</span></li>
+            <li><a href="https://jobs.nvidia.com/careers/job/893396863951-tech-lead-ethernet-networking-verification-engineer-us-tx-austin" target="_blank" rel="noopener">Ethernet Networking</a><span class="ip-note">Tech Lead level, Austin, TX</span></li>
+            <li><span class="plain">General ASIC</span><span class="ip-note">New-grad and generalist roles not tied to one block</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="plan-note" style="margin-top:16px">
+        <h3>Pattern worth noting</h3>
+        <p style="margin:0">Neither company lists a job titled "CXL" or "Data Fabric" directly — AMD's closest equivalent is <strong>Infinity Fabric</strong> (their proprietary interconnect, CXL-adjacent conceptually), and CXL-specific knowledge most likely lives inside <strong>Memory Controller</strong> or <strong>Memory Subsystem</strong> postings rather than having its own title. Graphics IP, CPU, and Memory Subsystem/Controller are the three blocks with the most consistent openings at both companies — which lines up with the Graphics IP domain tab above, and suggests Memory Controller/Infinity Fabric framing is more realistic than searching "CXL" by name.</p>
+      </div>
+    </section>
+
+    <section>
+      <p class="kicker">Suggested sequencing</p>
+      <p class="section-sub">My take on an order, if you want one beyond the priority ranking.</p>
+      <div class="plan-note">
+        <h3>Core, then one domain</h3>
+        <ol>
+          <li><span class="phase-label">1. Architecture prerequisites</span> — <span class="phase-courses">6.004 → 6.823 → 6.111 (optional if your job already covers hands-on RTL)</span>. This is what turns UVM from a mechanical skill into a diagnostic one — the vocabulary (pipelines, caching, coherency, OoO) that verification test plans are actually built around. Likely partially covered already by your GPU validation experience.</li>
+          <li><span class="phase-label">2. Verification methodology</span> — <span class="phase-courses">SystemVerilog fundamentals → UVM Verification Primer → Verification Academy UVM Framework</span>. The mechanical skill — testbenches, sequences, drivers, monitors, scoreboards — and it transfers regardless of which IP you end up verifying. Matches "UVM-based testbenches" in most Sr. DV postings directly.</li>
+          <li><span class="phase-label">3. Power-aware verification</span> — <span class="phase-courses">Accellera UPF Tutorial → Verification Academy Power Aware Verification</span>. Layers on top of plain UVM once it's solid — relevant to power management specifically.</li>
+          <li><span class="phase-label">4. Modeling & HLS</span> — <span class="phase-courses">Doulos SystemC/TLM Tutorial → MIT 6.375 (Complex Digital Systems)</span>. SystemC/TLM shows up explicitly in job postings as "SystemC, TLM, and related modeling approaches"; 6.375 (the current name for 6.884, already in your EE track) covers HLS-style hardware description directly.</li>
+          <li><span class="phase-label">5. Pick a domain</span> — <span class="phase-courses">Data Fabric IP (PCIe → CXL Consortium library → CXL tutorial → CXL paper) or Graphics IP (MIT 6.837 → UPenn CIS 565)</span>. Protocol- or pipeline-specific knowledge layered on top of the core — what a given IP actually needs to be checked for. Nothing stops you doing both, just sequence core first.</li>
+        </ol>
+      </div>
+      <div class="plan-note" style="margin-top:16px">
+        <h3>A few thoughts</h3>
+        <ol>
+          <li><strong>You don't need to finish the EE track first</strong> — the architecture prerequisites above (6.004/6.823/6.111) are included directly in this core roadmap so DV can run on its own, without waiting on the full EE sequence. Skip any you're already solid on from your current GPU validation role.</li>
+          <li><strong>Core before domain</strong> — UVM skill transfers across companies and IP; CXL- or graphics-specific knowledge only pays off once you can actually build a testbench to apply it in.</li>
+          <li><strong>Real postings (e.g. AMD's Sr. Silicon DV Engineer, graphics IP, Austin) explicitly list</strong> UVM-based testbenches, Verilog/SystemVerilog/C/C++, graphics pipeline architecture, and SystemC/TLM — the core roadmap is built to hit each of those directly, with the domain tabs layered on top for the specific IP you're aiming at.</li>
+          <li><strong>CXL builds on PCIe</strong> — there's no single canonical open PCIe course, but a working understanding of PCIe transaction layers pays off before the CXL-specific material clicks fully.</li>
+          <li>Most of the methodology/domain rows are industry material rather than academic courseware (Doulos, ChipVerify, Verification Academy, Accellera, the CXL Consortium) — expect hands-on tutorials and standards docs more than lecture videos, and expect some to assume you're already applying it against real RTL.</li>
+          <li>You mentioned you can source your own UVM material — swap any of the core rows below for whatever you're actually using; the tiers/sequencing still apply.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section>
+      <p class="kicker">Official coursework</p>
+      <div class="pending"><strong>Course list pending.</strong> Send your actual for-credit course list and I'll add it here too, separate from self-study.</div>
+    </section>
+  </div>
+
+  <div class="track" id="track-rtl">
+    <div class="track-head"><p>RTL/logic design for GPU and AI processor IP — actually writing and implementing the logic, upstream of and complementary to the DV track. Built directly from a real posting: AMD's <a href="https://careers.amd.com/careers-home/jobs/91519?lang=en-us" target="_blank" rel="noopener">Graphics &amp; AI Processor Design Engineer</a>, Austin — designing the GPU command processor (front-end of the GPU pipeline) and next-gen AI engine logic.</p></div>
+
+    <section>
+      <p class="kicker">Progress</p>
+      <div class="progress-card">
+        <div class="ring" id="ring-rtl" style="--pct:0"><div class="ring-inner" id="ring-label-rtl">0%</div></div>
+        <div class="progress-text">
+          <div class="big" id="progress-summary-rtl">0 of 14 courses complete</div>
+          <div class="small">Check off a course below as you finish it — saved in your browser, private to you.</div>
+        </div>
+        <div class="tier-counts" id="tier-counts-rtl"></div>
+      </div>
+    </section>
+
+    <section>
+      <p class="kicker">Self-study roadmap</p>
+      <p class="section-sub">Digital design foundations, RTL sign-off skills, and GPU/AI domain knowledge, listed fundamental → advanced. Several rows overlap with the EE and DV tracks — included here so this track can run on its own.</p>
+      <table>
+        <thead><tr><th></th><th>#</th><th>Course</th><th>Priority</th></tr></thead>
+        <tbody id="course-table-rtl"></tbody>
+      </table>
+      <div class="pending" style="margin-top:16px"><strong>EDA tool proficiency (VCS, Cadence, Mentor Graphics)</strong> is explicitly listed in the posting but isn't open courseware — it's tool-specific, vendor-licensed software usually learned through a company's own training once you have access. Not tracked as a course here; worth noting as a real gap between self-study and the actual job.</div>
+    </section>
+
+    <section>
+      <p class="kicker">Suggested sequencing</p>
+      <p class="section-sub">My take on an order, if you want one beyond the priority ranking.</p>
+      <div class="plan-note">
+        <h3>Four phases</h3>
+        <ol>
+          <li><span class="phase-label">1. Digital design foundations</span> — <span class="phase-courses">6.004 → HDLBits → Verilog/SystemVerilog RTL (ChipVerify) → 6.111 → 6.823 → 6.374</span>. Logic, then actual Verilog fluency, hands-on RTL, architecture/pipelines (directly relevant to designing a command processor), and CMOS/VLSI timing & power, which the posting names explicitly ("high performance, lower power, meet timing requirements").</li>
+          <li><span class="phase-label">2. RTL sign-off skills</span> — <span class="phase-courses">Clock Domain Crossing (CDC) → LINT / RTL sign-off checks → Static Timing Analysis fundamentals</span>. Matches the posting's "design rule checks to finish tape-out sign-off, including LINT, CDC etc." almost word for word. Then a light pass of UVM (Doulos primer) so you can read DV's testbenches and write code that's easy to verify — the posting asks you to "coordinate with verification engineer" and mentions VCS and functional verification tools.</li>
+          <li><span class="phase-label">3. Advanced RTL</span> — <span class="phase-courses">MIT 6.375 (Complex Digital Systems / HLS)</span>. Already in your EE track as 6.884 — no need to redo if you've covered it there.</li>
+          <li><span class="phase-label">4. GPU & AI domain knowledge</span> — <span class="phase-courses">MIT 6.837 (Computer Graphics) → UPenn CIS 565 (GPU Architecture) → MIT 6.5940 EfficientML.ai (TinyML and Efficient Deep Learning Computing)</span>. The posting's title is "Graphics <strong>&amp;</strong> AI Processor" — 6.5940 covers the AI-accelerator half specifically (quantization, efficient inference, model compression) that the graphics-only courses don't touch.</li>
+        </ol>
+      </div>
+      <div class="plan-note" style="margin-top:16px">
+        <h3>A few thoughts</h3>
+        <ol>
+          <li><strong>This is a design role, not a verification role</strong> — the posting asks you to "coordinate with verification engineer," not be one. It still benefits from DV-track knowledge (you'll work with DV engineers constantly and want to write code that's easy to verify), but the core skill here is implementing logic, not testing it.</li>
+          <li><strong>Heavy overlap with your EE track</strong> — the 6.004/6.111/6.823/6.374 rows are the same courses already in the EE roadmap. If you've made progress there, you're already most of the way through this track's foundation. The Verilog rows (HDLBits, ChipVerify) are new here — the EE track leans on 6.111 to teach Verilog implicitly.</li>
+          <li><strong>CDC and LINT are named explicitly in the posting</strong> — these are sign-off checks every RTL designer needs to pass before tapeout, and they're genuinely learnable from free references (ChipVerify, open guides) rather than requiring an expensive course.</li>
+          <li><strong>"AI Processor" is the differentiator</strong> — a generic GPU design background covers the graphics half; 6.5940 (EfficientML.ai, MIT HAN Lab, free on YouTube) is what covers the AI-accelerator half the title calls out specifically.</li>
+          <li>No visa sponsorship on this particular posting, per the listing — worth knowing if that's a factor for you.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section>
+      <p class="kicker">Official coursework</p>
+      <div class="pending"><strong>Course list pending.</strong> Send your actual for-credit course list and I'll add it here too, separate from self-study.</div>
+    </section>
+  </div>
+
+  <footer>© Your Name</footer>
+</div>
+
+<script>
+  var tierLabel = {must:"Must", strong:"Strong", useful:"Useful", optional:"Optional"};
+
+  var tracks = {
+    ee: {
+      storageKey: "studyplan-ee-v1",
+      courses: [
+        {n:1, name:"6.002 Circuits and Electronics", subject:"Circuits, MOS, analog/digital fundamentals", tier:"must"},
+        {n:2, name:"6.004 Computation Structures", subject:"Digital logic, CPU, hardware systems <span class=\"alt\">· Alt: <a href=\"https://archive.org/details/ucberkeley_webcast_31r9tQvYn2g\" target=\"_blank\" rel=\"noopener\">UC Berkeley CS61C</a></span>", tier:"must"},
+        {n:3, name:"6.111 Introductory Digital Systems Laboratory", subject:"RTL, FPGA, FSM, timing, Verilog/VHDL <span class=\"alt\">· Alt: <a href=\"https://www.coursera.org/learn/build-a-computer\" target=\"_blank\" rel=\"noopener\">Nand2Tetris</a> (hands-on, smaller scope)</span>", tier:"must"},
+        {n:4, name:"6.823 Computer System Architecture", subject:"CPU architecture, cache, OoO, vector, parallel <span class=\"alt\">· Alt: <a href=\"https://www.youtube.com/user/cmu18447\" target=\"_blank\" rel=\"noopener\">CMU 18-447</a> (Onur Mutlu)</span>", tier:"must"},
+        {n:5, name:"6.012 Microelectronic Devices and Circuits", subject:"MOSFET/device physics, semiconductor circuits", tier:"strong"},
+        {n:6, name:"6.374 Analysis and Design of Digital ICs", subject:"CMOS/VLSI, timing, power, memory, testing <span class=\"alt\">· Alt: <a href=\"https://inst.eecs.berkeley.edu/~cs250/fa10/\" target=\"_blank\" rel=\"noopener\">UC Berkeley CS250</a> (Chisel-based)</span>", tier:"must"},
+        {n:7, name:"6.884 Complex Digital Systems", subject:"Large-scale CMOS/VLSI design", tier:"strong"},
+        {n:8, name:"6.1810 Operating System Engineering", subject:"OS, interrupts, VM, drivers, HW/SW", tier:"useful"},
+        {n:9, name:"6.003 Signals and Systems", subject:"Signals, frequency domain, systems", tier:"optional"},
+        {n:10, name:"6.006 Introduction to Algorithms", subject:"Algorithms/data structures", tier:"optional"},
+        {n:11, name:"6.189 Multicore Programming Primer", subject:"Parallel programming", tier:"useful"},
+        {n:12, name:"6.033 Computer System Engineering", subject:"System-level engineering", tier:"optional"},
+        {n:13, name:"6.883 Program Analysis", subject:"Testing, debugging, static/dynamic analysis", tier:"useful"}
+      ]
+    },
+    ai: {
+      storageKey: "studyplan-ai-v1",
+      courses: [
+        {n:1, name:"CS229 Machine Learning", subject:"Classical ML: regression, optimization, bias/variance", tier:"must"},
+        {n:2, name:"CS230 Deep Learning", subject:"Neural nets, CNNs, training practice", tier:"must"},
+        {n:3, name:"CS224N NLP with Deep Learning", subject:"NLP fundamentals, sequence models", tier:"strong"},
+        {n:4, name:"CS324 Large Language Models", subject:"LLM architecture, training, evaluation", tier:"strong"},
+        {n:5, name:"CS329Z Engineering AI Agents", subject:"Agent architectures, tool use, orchestration", tier:"must"},
+        {n:6, name:"CS25 Transformers United", subject:"Transformers overview seminar", tier:"useful"},
+        {n:7, name:"CS234 Reinforcement Learning", subject:"RL fundamentals, RLHF relevance", tier:"useful"},
+        {n:8, name:"CS231N Convolutional Neural Networks", subject:"Computer vision, image models", tier:"optional"},
+        {n:9, name:"CS236 Deep Generative Models", subject:"Generative modeling, diffusion, VAEs", tier:"optional"}
+      ]
+    },
+    "dv-core": {
+      storageKey: "studyplan-dv-core-v1",
+      courses: [
+        {n:1, name:"6.004 Computation Structures", subject:"Digital logic, CPU, hardware systems — shared with EE track <span class=\"alt\">· Alt: <a href=\"https://archive.org/details/ucberkeley_webcast_31r9tQvYn2g\" target=\"_blank\" rel=\"noopener\">UC Berkeley CS61C</a></span>", tier:"must"},
+        {n:2, name:"6.823 Computer System Architecture", subject:"Pipelines, cache, OoO, coherency — what test plans are built around; shared with EE track <span class=\"alt\">· Alt: <a href=\"https://www.youtube.com/user/cmu18447\" target=\"_blank\" rel=\"noopener\">CMU 18-447</a></span>", tier:"must"},
+        {n:3, name:"6.111 Introductory Digital Systems Laboratory", subject:"Hands-on RTL/FPGA, timing, FSMs — skip if your job already covers this; shared with EE track <span class=\"alt\">· Alt: <a href=\"https://www.coursera.org/learn/build-a-computer\" target=\"_blank\" rel=\"noopener\">Nand2Tetris</a></span>", tier:"strong"},
+        {n:4, name:"SystemVerilog Fundamentals (ChipVerify)", subject:"Language basics: assertions, classes, randomization", tier:"must"},
+        {n:5, name:"UVM Verification Primer (Doulos)", subject:"UVM testbench architecture: sequences, drivers, monitors, scoreboards", tier:"must"},
+        {n:6, name:"Verification Academy — UVM Framework", subject:"Coverage-driven verification, deeper UVM methodology", tier:"strong"},
+        {n:7, name:"Accellera UPF Tutorial", subject:"Unified Power Format fundamentals, from the standards body", tier:"strong"},
+        {n:8, name:"Verification Academy — Power Aware Verification", subject:"UPF-based power-intent verification flow", tier:"must"},
+        {n:9, name:"Doulos SystemC & TLM-2.0 Tutorial", subject:"SystemC, TLM modeling — named directly in DV job postings", tier:"strong"},
+        {n:10, name:"MIT 6.375 Complex Digital Systems (HLS)", subject:"High-level synthesis, Bluespec — current name for 6.884", tier:"useful"}
+      ]
+    },
+    "dv-fabric": {
+      storageKey: "studyplan-dv-fabric-v1",
+      courses: [
+        {n:1, name:"PCIe fundamentals (self-directed)", subject:"Transaction layers, link/physical layers — CXL's foundation", tier:"useful"},
+        {n:2, name:"CXL Consortium Resource Library", subject:"CXL.io / CXL.cache / CXL.mem protocol spec", tier:"must"},
+        {n:3, name:"CXL Consortium FMS Tutorial", subject:"Applied overview, real deployment context", tier:"useful"},
+        {n:4, name:"An Introduction to CXL (arXiv paper)", subject:"Academic-style bridge between spec and concepts", tier:"useful"}
+      ]
+    },
+    "dv-graphics": {
+      storageKey: "studyplan-dv-graphics-v1",
+      courses: [
+        {n:1, name:"MIT 6.837 Computer Graphics (OCW)", subject:"Graphics pipeline fundamentals — for graphics-IP verification roles <span class=\"alt\">· Alt: <a href=\"https://cs184.eecs.berkeley.edu/\" target=\"_blank\" rel=\"noopener\">UC Berkeley CS184</a> or GAMES101</span>", tier:"strong"},
+        {n:2, name:"UPenn CIS 565: GPU Programming and Architecture", subject:"GPU architecture, parallel execution model", tier:"strong"}
+      ]
+    },
+    rtl: {
+      storageKey: "studyplan-rtl-v1",
+      courses: [
+        {n:1, name:"6.004 Computation Structures", subject:"Digital logic, CPU, hardware systems — shared with EE track <span class=\"alt\">· Alt: <a href=\"https://archive.org/details/ucberkeley_webcast_31r9tQvYn2g\" target=\"_blank\" rel=\"noopener\">UC Berkeley CS61C</a></span>", tier:"must"},
+        {n:2, name:"HDLBits (Verilog practice)", subject:"Free interactive Verilog exercises with instant pass/fail — gets you fluent writing synthesizable RTL <span class=\"alt\">· <a href=\"https://hdlbits.01xz.net/\" target=\"_blank\" rel=\"noopener\">hdlbits.01xz.net</a></span>", tier:"must"},
+        {n:3, name:"Verilog / SystemVerilog RTL Design (ChipVerify)", subject:"Synthesizable RTL coding: FSM styles, blocking vs. non-blocking, avoiding latches — the habits LINT checks for <span class=\"alt\">· <a href=\"https://chipverify.com/\" target=\"_blank\" rel=\"noopener\">chipverify.com</a></span>", tier:"must"},
+        {n:4, name:"6.111 Introductory Digital Systems Laboratory", subject:"Hands-on RTL/FPGA, timing, FSMs — shared with EE track <span class=\"alt\">· Alt: <a href=\"https://www.coursera.org/learn/build-a-computer\" target=\"_blank\" rel=\"noopener\">Nand2Tetris</a></span>", tier:"must"},
+        {n:5, name:"6.823 Computer System Architecture", subject:"Pipelines, scheduling — directly relevant to designing a command processor; shared with EE track <span class=\"alt\">· Alt: <a href=\"https://www.youtube.com/user/cmu18447\" target=\"_blank\" rel=\"noopener\">CMU 18-447</a></span>", tier:"must"},
+        {n:6, name:"6.374 Analysis and Design of Digital ICs", subject:"CMOS/VLSI, timing, power — \"high performance, lower power, meet timing\"; shared with EE track <span class=\"alt\">· Alt: <a href=\"https://inst.eecs.berkeley.edu/~cs250/fa10/\" target=\"_blank\" rel=\"noopener\">UC Berkeley CS250</a></span>", tier:"must"},
+        {n:7, name:"Clock Domain Crossing (CDC) — ChipVerify / thedatabus guide", subject:"CDC design & verification techniques — named directly in the posting", tier:"must"},
+        {n:8, name:"LINT / RTL sign-off checks", subject:"Static RTL rule checking before tapeout sign-off — named directly in the posting", tier:"strong"},
+        {n:9, name:"Static Timing Analysis (STA) fundamentals", subject:"Timing closure — open STA course/reference material", tier:"strong"},
+        {n:10, name:"UVM Verification Primer (Doulos)", subject:"Enough UVM to read and extend testbenches and work with DV engineers — shared with DV track <span class=\"alt\">· <a href=\"https://www.doulos.com/knowhow/systemverilog/uvm/uvm-verification-primer/\" target=\"_blank\" rel=\"noopener\">Doulos primer</a></span>", tier:"useful"},
+        {n:11, name:"MIT 6.375 Complex Digital Systems (HLS)", subject:"High-level synthesis, Bluespec — already in EE track as 6.884", tier:"useful"},
+        {n:12, name:"MIT 6.837 Computer Graphics (OCW)", subject:"Graphics pipeline fundamentals — shared with DV Graphics IP domain <span class=\"alt\">· Alt: <a href=\"https://cs184.eecs.berkeley.edu/\" target=\"_blank\" rel=\"noopener\">UC Berkeley CS184</a> or GAMES101</span>", tier:"strong"},
+        {n:13, name:"UPenn CIS 565: GPU Programming and Architecture", subject:"GPU architecture, parallel execution model — shared with DV Graphics IP domain", tier:"strong"},
+        {n:14, name:"MIT 6.5940 EfficientML.ai (TinyML and Efficient Deep Learning Computing)", subject:"AI accelerator hardware, quantization, efficient inference — the \"AI Processor\" half of the role", tier:"must"}
+      ]
+    }
+  };
+
+  function loadDone(track){
+    try{ return JSON.parse(localStorage.getItem(track.storageKey) || "{}"); }catch(e){ return {}; }
+  }
+  function saveDone(track, done){
+    try{ localStorage.setItem(track.storageKey, JSON.stringify(done)); }catch(e){}
+  }
+
+  function render(key){
+    var track = tracks[key];
+    var done = loadDone(track);
+    var tbody = document.getElementById("course-table-" + key);
+    tbody.innerHTML = "";
+    track.courses.forEach(function(c){
+      var tr = document.createElement("tr");
+      var isDone = !!done[c.n];
+      if(isDone) tr.className = "done";
+      tr.innerHTML =
+        '<td class="check"><input type="checkbox" data-n="' + c.n + '" ' + (isDone ? "checked" : "") + '></td>' +
+        '<td class="num mono">' + c.n + '</td>' +
+        '<td><div class="course">' + c.name + '</div><div class="subject">' + c.subject + '</div></td>' +
+        '<td><span class="pill ' + c.tier + '">' + tierLabel[c.tier] + '</span></td>';
+      tbody.appendChild(tr);
+    });
+    tbody.querySelectorAll('input[type=checkbox]').forEach(function(box){
+      box.addEventListener('change', function(){
+        var d = loadDone(track);
+        d[this.dataset.n] = this.checked;
+        saveDone(track, d);
+        render(key);
+      });
+    });
+
+    var total = track.courses.length;
+    var completed = track.courses.filter(function(c){ return !!done[c.n]; }).length;
+    var pct = Math.round((completed / total) * 100);
+    document.getElementById("ring-" + key).style.setProperty("--pct", pct);
+    document.getElementById("ring-label-" + key).textContent = pct + "%";
+    document.getElementById("progress-summary-" + key).textContent = completed + " of " + total + " courses complete";
+
+    var tiers = ["must","strong","useful","optional"];
+    var counts = document.getElementById("tier-counts-" + key);
+    counts.innerHTML = tiers.map(function(t){
+      var inTier = track.courses.filter(function(c){ return c.tier === t; });
+      var doneInTier = inTier.filter(function(c){ return !!done[c.n]; }).length;
+      return '<span>' + tierLabel[t] + ': <b>' + doneInTier + '/' + inTier.length + '</b></span>';
+    }).join('');
+  }
+
+  render("ee");
+  render("ai");
+  render("dv-core");
+  render("dv-fabric");
+  render("dv-graphics");
+  render("rtl");
+
+  (function(){
+    var buttons = document.querySelectorAll('.tab-btn');
+    function activate(key){
+      buttons.forEach(function(b){ b.classList.toggle('active', b.dataset.track === key); });
+      document.querySelectorAll('.track').forEach(function(t){ t.classList.toggle('active', t.id === 'track-' + key); });
+    }
+    buttons.forEach(function(b){
+      b.addEventListener('click', function(){ activate(this.dataset.track); });
+    });
+    activate('ee');
+  })();
+
+  (function(){
+    var buttons = document.querySelectorAll('.subtab-btn');
+    function activateDomain(domain){
+      buttons.forEach(function(b){ b.classList.toggle('active', b.dataset.domain === domain); });
+      document.querySelectorAll('.domain-panel').forEach(function(p){ p.classList.toggle('active', p.id === 'domain-' + domain); });
+    }
+    buttons.forEach(function(b){
+      b.addEventListener('click', function(){ activateDomain(this.dataset.domain); });
+    });
+    activateDomain('fabric');
+  })();
+</script>
+</body>
+</html>

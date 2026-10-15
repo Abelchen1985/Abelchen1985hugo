@@ -92,6 +92,37 @@
 
   footer{ text-align:center; color:var(--muted); font-size:.85rem; padding:0 0 48px }
 
+
+  /* About (redesigned) */
+  .ab{ padding:8px 0 56px }
+  .ab-photo{
+    width:100%; aspect-ratio:21/9; min-height:300px; max-height:64vh; border-radius:22px; box-shadow:var(--shadow);
+    background:linear-gradient(180deg, rgba(20,18,12,0) 60%, rgba(20,18,12,.35) 100%), url("about.jpg") 58% 42% / cover no-repeat;
+    -webkit-user-select:none; user-select:none; -webkit-touch-callout:none;
+  }
+  .ab-body{ display:grid; grid-template-columns:minmax(0,1.7fr) minmax(0,1fr); gap:48px; margin-top:-56px; position:relative; padding:0 28px }
+  @media (max-width:860px){ .ab-body{ grid-template-columns:1fr; gap:24px; padding:0; margin-top:24px } }
+  .ab-main{
+    background:var(--card); border:1px solid var(--border); border-radius:20px; box-shadow:var(--shadow);
+    padding:40px 44px 44px; min-height:360px;
+  }
+  @media (max-width:560px){ .ab-main{ padding:28px 22px } }
+  .ab .kicker{ font-size:.8rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--clay); margin:0 0 8px }
+  .ab h2{ font-size:clamp(2rem,4.6vw,3rem); line-height:1.1; margin:0 0 22px }
+  .ab-story p{ margin:0 0 16px; font-size:1.05rem; line-height:1.75; color:var(--ink); max-width:62ch }
+  .ab-story .ab-lead{ font-family:"Fraunces",Georgia,serif; font-size:1.35rem; line-height:1.5; font-weight:600 }
+  .ab-story .ab-hint{ color:var(--muted); font-size:.85rem; border-top:1px dashed var(--border); padding-top:14px; margin-top:26px }
+  .ab-side{ display:flex; flex-direction:column; gap:18px; padding-top:72px }
+  @media (max-width:860px){ .ab-side{ padding-top:0 } }
+  .ab-card{ background:var(--card); border:1px solid var(--border); border-radius:18px; padding:22px 24px; box-shadow:var(--shadow) }
+  .ab-card-soft{ background:transparent; box-shadow:none; border-style:dashed }
+  .ab-card-title{ font-size:.75rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--clay); margin:0 0 12px }
+  .ab-facts{ list-style:none; margin:0; padding:0 }
+  .ab-facts li{ display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); font-weight:600 }
+  .ab-facts li:last-child{ border-bottom:0 }
+  .ab-facts span{ color:var(--muted); font-weight:500 }
+  .ab-muted{ color:var(--muted); font-size:.92rem; margin:0 }
+
   /* merged sections */
   .sec{ padding:32px 0 24px }
   .view{ display:none } .view.active{ display:block }
@@ -335,16 +366,39 @@
   </div>
 
   <div class="view" id="view-about">
-  <div class="about" id="about">
-    <div>
-      <p class="kicker">Who is Weiyuan?</p>
-      <h2 class="serif">A few lines, not a whole résumé.</h2>
-      <div class="pending"><strong>Bio pending.</strong> Send me your background, what you're up to now, and a sentence or two of personality, and this becomes real copy instead of a placeholder.</div>
+    <div class="ab" id="about">
+      <div class="ab-photo" oncontextmenu="return false" role="img" aria-label="Milky Way over the desert"></div>
+
+      <div class="ab-body">
+        <div class="ab-main">
+          <p class="kicker">About</p>
+          <h2 class="serif">Who is Weiyuan?</h2>
+
+          <!-- ✏️ WRITE YOUR STORY HERE: replace the placeholder box below with your own paragraphs
+               (use <p class="ab-lead"> for the first line and plain <p> for the rest). -->
+          <div class="ab-story">
+            <p class="ab-lead">Your opening line goes here, one or two sentences that sum you up.</p>
+            <p>Your story goes here: where you're from, what you do, what you're working toward, and what you do for fun. A few short paragraphs is plenty.</p>
+            <p class="ab-hint">Placeholder text. Send me your bio and I'll replace it.</p>
+          </div>
+        </div>
+
+        <aside class="ab-side">
+          <div class="ab-card">
+            <p class="ab-card-title">Quick facts</p>
+            <ul class="ab-facts">
+              <li><span>Plays</span>Basketball</li>
+              <li><span>Watches</span>Movies</li>
+              <li><span>Loves</span>Travel</li>
+            </ul>
+          </div>
+          <div class="ab-card ab-card-soft">
+            <p class="ab-card-title">Elsewhere</p>
+            <p class="ab-muted">Links and contact details can go here once you've picked which to share.</p>
+          </div>
+        </aside>
+      </div>
     </div>
-    <div class="about-photo" oncontextmenu="return false"></div>
-  </div>
-
-
   </div>
 
   <section class="sec view" id="travel">

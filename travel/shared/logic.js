@@ -66,7 +66,11 @@
     MS: { std: -6, name: 'Mississippi (Central)' },
     AL: { std: -6, name: 'Alabama (Central)' },
     FLC: { std: -6, name: 'the Florida Panhandle (Central)' },
-    FL: { std: -5, name: 'Florida (Eastern)' }
+    FL: { std: -5, name: 'Florida (Eastern)' },
+    AR: { std: -6, name: 'Arkansas (Central)' },
+    TNW: { std: -6, name: 'Middle Tennessee (Central)' },
+    TNE: { std: -5, name: 'East Tennessee (Eastern)' },
+    KY: { std: -6, name: 'western Kentucky (Central)' }
   };
 
   function utcOffset(zone, iso) {
@@ -215,6 +219,11 @@
       else out.push('Manatees are mostly offshore this time of year, so sightings at the springs are hit or miss.');
     }
     if (has('spring-break') && m === 3) out.push('Spring break: expect crowds and higher prices. Book rooms early.');
+    if (has('kuwohi') && (m === 12 || m <= 3)) out.push('Kuwohi Road is closed to cars from Dec 1 through Mar 31. Newfound Gap Road usually stays open, but can close for snow and ice.');
+    if (has('cades') && m >= 5 && m <= 9 && d.getUTCDay() === 3) out.push('It’s a Wednesday: Cades Cove Loop Road is closed to cars today (open to walkers and bikes). Swap this day with the day before, or bike the loop.');
+    if (has('fall-color') && m === 10) out.push('Fall-color season: expect the year’s heaviest traffic in Gatlinburg, Cades Cove and Newfound Gap Road, especially on weekends. Start at sunrise.');
+    if (has('fall-color') && m === 11 && day <= 10) out.push('Late fall color can still be good in the lower valleys in early November.');
+    if (has('fireflies') && ((m === 5 && day >= 20) || (m === 6 && day <= 20))) out.push('Synchronous firefly season near Elkmont (about late May to mid-June) is by lottery on recreation.gov, usually drawn in late April.');
     if (has('rim') && winter) out.push('Winter on the rim: expect icy patches on the Rim Trail and nights well below freezing.');
     if (m === 12 && day === 24) out.push('Christmas Eve: many restaurants close early.');
     if (m === 12 && day === 25) out.push('Christmas Day: many restaurants and some shops are closed. Pack lunch and snacks, and fill up on gas when you can.');

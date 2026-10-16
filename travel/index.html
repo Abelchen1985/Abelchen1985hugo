@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Travel</title>
-  <meta name="description" content="Road trip plans with maps, stops and forecasts.">
+  <meta name="description" content="Family road trip plans with maps, national parks, stops, best seasons and forecasts.">
   <style>
     :root {
       --bg: #faf6ef; --panel: #ffffff; --ink: #2a2118; --muted: #6b5d4f;
@@ -36,11 +36,12 @@
     .thumb {
       height: 80px; border-radius: 8px;
       background: linear-gradient(135deg, #b4441c 0%, #d9822b 55%, #e9b65b 100%);
-      display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 1.6rem;
+      display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 1.5rem; text-align: center;
     }
     .trip h2 { margin: 0 0 4px; font-size: 1.15rem; }
     .trip p { margin: 0; color: var(--muted); font-size: 0.93rem; }
     .meta { margin-top: 6px !important; font-size: 0.85rem !important; }
+    .trip p.season { margin-top: 6px; font-size: 0.85rem; color: var(--ink); }
     @media (max-width: 520px) { .trip { grid-template-columns: 1fr; } .thumb { height: 64px; } }
   </style>
 </head>
@@ -48,17 +49,51 @@
   <header class="wrap">
     <a class="home" href="/">&larr; Home</a>
     <h1>Travel</h1>
-    <p class="lede">Road trip plans with maps, stops, hotels and forecasts.</p>
+    <p class="lede">Family road trips from Austin with maps, national parks, stops, hotels, the best season to go and live forecasts.</p>
   </header>
   <main class="wrap">
     <ul class="trips">
       <li>
         <a class="trip" href="southwest-road-trip/">
-          <span class="thumb" aria-hidden="true">8 days</span>
+          <span class="thumb" aria-hidden="true" style="background:linear-gradient(135deg, #b4441c 0%, #d9822b 55%, #e9b65b 100%)">8 days</span>
           <span>
             <h2>Southwest Family Road Trip</h2>
             <p>Austin to the Grand Canyon, Page, Antelope Canyon and White Sands, and back.</p>
-            <p class="meta">Amarillo &middot; Albuquerque &middot; Sedona &middot; Grand Canyon &middot; Page &middot; Gallup &middot; White Sands &middot; Roswell</p>
+            <p class="meta">National parks: Grand Canyon &middot; White Sands &middot; Petrified Forest &middot; Carlsbad Caverns (optional)</p>
+            <p class="season"><strong>Best season:</strong> April&ndash;May and October</p>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a class="trip" href="yellowstone-road-trip/">
+          <span class="thumb" aria-hidden="true" style="background:linear-gradient(135deg, #1e5a3a 0%, #3f7d4e 55%, #c9a24a 100%)">13 days</span>
+          <span>
+            <h2>Yellowstone &amp; Rockies Family Road Trip</h2>
+            <p>Austin to Rocky Mountain, Grand Teton and Yellowstone, and home through the Black Hills and Badlands.</p>
+            <p class="meta">National parks: Rocky Mountain &middot; Grand Teton &middot; Yellowstone &middot; Wind Cave &middot; Badlands, plus Devils Tower, Mount Rushmore and Capulin Volcano</p>
+            <p class="season"><strong>Best season:</strong> mid-June to mid-July and September (most Yellowstone roads close Nov&ndash;Apr)</p>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a class="trip" href="destin-road-trip/">
+          <span class="thumb" aria-hidden="true" style="background:linear-gradient(135deg, #0e7490 0%, #22a3b8 55%, #f2d49b 100%)">6 days</span>
+          <span>
+            <h2>Destin &amp; Gulf Coast Family Road Trip</h2>
+            <p>Austin to New Orleans and the white-sand beaches of Destin and 30A, and back.</p>
+            <p class="meta">Gulf Islands National Seashore &middot; Jean Lafitte NHP &middot; USS Alabama &middot; Space Center Houston</p>
+            <p class="season"><strong>Best season:</strong> late April&ndash;May and October</p>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a class="trip" href="key-west-road-trip/">
+          <span class="thumb" aria-hidden="true" style="background:linear-gradient(135deg, #0369a1 0%, #14a3a3 55%, #f5c26b 100%)">11 days</span>
+          <span>
+            <h2>Key West &amp; Everglades Family Road Trip</h2>
+            <p>Austin along the Gulf to Florida&rsquo;s springs, the Everglades and the Overseas Highway to Key West, and back.</p>
+            <p class="meta">National parks: Everglades &middot; Biscayne &middot; Dry Tortugas &middot; Big Cypress &middot; Gulf Islands</p>
+            <p class="season"><strong>Best season:</strong> December&ndash;April, the dry season (hurricane risk peaks Aug&ndash;Oct)</p>
           </span>
         </a>
       </li>

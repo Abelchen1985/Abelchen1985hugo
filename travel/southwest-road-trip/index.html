@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Southwest Family Road Trip</title>
-  <meta name="description" content="An 8-day, family-paced road trip from Austin to the Grand Canyon, Page and White Sands, with hotels, stops and live forecasts.">
+  <meta name="description" content="An 8-day, family-paced road trip from Austin to the Grand Canyon, Page and White Sands, with national parks, hotels, stops, best season and live forecasts.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../shared/style.css">
 </head>
 <body>
   <header class="hero">
@@ -25,6 +25,8 @@
   </header>
 
   <main class="wrap">
+    <section class="season" id="season" aria-labelledby="season-h"></section>
+
     <section class="overview">
       <div id="map" aria-label="Map of the road trip route"></div>
       <div>
@@ -58,7 +60,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
   <script src="trip.js"></script>
-  <script src="logic.js"></script>
-  <script src="app.js"></script>
+  <script src="../shared/logic.js"></script>
+  <script src="../shared/app.js"></script>
 </body>
 </html>

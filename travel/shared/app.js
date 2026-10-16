@@ -2,6 +2,7 @@
   'use strict';
 
   var RT = window.RT, TRIP = window.TRIP, DAYS = window.DAYS;
+  var KEY = TRIP.id || 'sw'; // prefix for this trip's saved settings
 
   /* ---------- helpers ---------- */
   function $(id) { return document.getElementById(id); }
@@ -38,12 +39,12 @@
   var startParam = params.get('start');
   var state = {
     start: RT.parseISO(startParam) ? startParam
-      : RT.parseISO(lsGet('sw-start')) ? lsGet('sw-start')
+      : RT.parseISO(lsGet(KEY + '-start')) ? lsGet(KEY + '-start')
       : (RT.parseISO(TRIP.defaultStart) ? TRIP.defaultStart : null),
     sel: null,
     wx: null,          // array of date->day maps, one per DAYS entry
     wxError: null,
-    done: lsGet('sw-checklist') || {}
+    done: lsGet(KEY + '-checklist') || {}
   };
 
   function dateFor(i) { return state.start ? RT.addDays(state.start, i) : null; }
@@ -68,7 +69,7 @@
 
   function setStart(v) {
     state.start = v;
-    lsSet('sw-start', v);
+    lsSet(KEY + '-start', v);
     var p = new URLSearchParams(location.search);
     if (v) p.set('start', v); else p.delete('start');
     var qs = p.toString();
@@ -146,7 +147,7 @@
   }
 
   /* ---------- weather ---------- */
-  var CACHE_KEY = 'sw-wx-v1', CACHE_MS = 30 * 60 * 1000;
+  var CACHE_KEY = KEY + '-wx-v1', CACHE_MS = 30 * 60 * 1000;
   var SIG = DAYS.map(function (d) { return d.wx.lat + ',' + d.wx.lon; }).join('|');
 
   function loadWeather(force) {
@@ -288,8 +289,9 @@
       if (date) {
         var cc = RT.clockChange(day.zones[0], day.zones[1], date);
         if (cc) notes.push('🕒 ' + cc);
-        RT.seasonNotes(day.flags, date).forEach(function (s) { notes.push('📅 ' + s); });
-      } else if (day.zones[0] !== day.zones[1]) {
+        RT.seasonNotes(day.flags, date, TRIP).forEach(function (s) { notes.push('📅 ' + s); });
+      } else if (RT.utcOffset(day.zones[0], '2001-01-01') !== RT.utcOffset(day.zones[1], '2001-01-01') ||
+          RT.utcOffset(day.zones[0], '2001-07-01') !== RT.utcOffset(day.zones[1], '2001-07-01')) {
         notes.push('🕒 Time zone change today. Set a start date to see whether clocks change.');
       }
       if (notes.length) right.appendChild(el('ul', { class: 'notes' }, notes.map(function (t) { return el('li', { text: t }); })));
@@ -303,7 +305,7 @@
           }))
         ]));
       } else {
-        right.appendChild(el('div', { class: 'hotel', text: 'Home.' }));
+        right.appendChild(el('div', { class: 'hotel', text: 'End of the trip.' }));
       }
 
       card.appendChild(el('div', { class: 'day-body' }, [left, right]));
@@ -335,7 +337,7 @@
     window.CHECKLIST.forEach(function (c) {
       var box = el('input', { type: 'checkbox', id: 'chk-' + c.id, onchange: function (e) {
         if (e.target.checked) state.done[c.id] = true; else delete state.done[c.id];
-        lsSet('sw-checklist', state.done);
+        lsSet(KEY + '-checklist', state.done);
         renderChecklist();
       } });
       box.checked = !!state.done[c.id];
@@ -349,8 +351,39 @@
     window.PACKING.forEach(function (p) { ul.appendChild(el('li', { text: p })); });
   }
 
+  /* ---------- best season ---------- */
+  var SEASON_LABELS = { best: 'Best', good: 'Good', fair: 'Mixed', off: 'Avoid' };
+  var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+  function renderSeason() {
+    var s = TRIP.season, box = $('season');
+    if (!s || !box) return;
+    clear(box);
+    var labels = Object.assign({}, SEASON_LABELS, s.labels || {});
+    var startMonth = state.start ? RT.parseISO(state.start).getUTCMonth() : null;
+    box.appendChild(el('h2', { id: 'season-h', text: 'Best time to go' }));
+    box.appendChild(el('p', { class: 'season-sum', text: s.summary }));
+    box.appendChild(el('ol', { class: 'months', 'aria-label': 'Month-by-month rating' }, s.months.map(function (lvl, i) {
+      return el('li', { class: 'm ' + lvl + (startMonth === i ? ' cur' : ''), title: MONTHS[i] + ': ' + labels[lvl] }, [
+        el('span', { class: 'mn', text: MONTHS[i] }), el('span', { class: 'ml', text: labels[lvl] })
+      ]);
+    })));
+    if (startMonth != null) {
+      var lvl = s.months[startMonth];
+      box.appendChild(el('p', { class: 'season-pick ' + lvl, text: 'Your start date is in ' + MONTHS[startMonth] + ', rated “' + labels[lvl] + '” for this trip.' +
+        (lvl === 'fair' || lvl === 'off' ? ' Read the notes below before you book.' : '') }));
+    }
+    box.appendChild(el('ul', { class: 'season-notes' }, s.notes.map(function (n) { return el('li', { text: n }); })));
+    if (s.sources && s.sources.length) {
+      var src = el('p', { class: 'meta' }, ['Sources: ']);
+      s.sources.forEach(function (x, i) { if (i) src.appendChild(document.createTextNode(' · ')); src.appendChild(link(x.url, x.label)); });
+      box.appendChild(src);
+    }
+  }
+
   function render() {
     updateStatus();
+    renderSeason();
     renderGlance();
     renderDays();
   }

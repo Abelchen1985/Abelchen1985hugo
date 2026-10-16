@@ -3,10 +3,27 @@
    check them in Google Maps for your travel date. */
 
 window.TRIP = {
+  id: 'sw',
   title: 'Southwest Family Road Trip',
   subtitle: 'Austin → Grand Canyon → Page → White Sands → Austin · 8 days, family-paced',
   defaultStart: null,
-  home: { name: 'Austin, TX', lat: 30.2672, lon: -97.7431 }
+  home: { name: 'Austin, TX', lat: 30.2672, lon: -97.7431 },
+  roads: 'az511.gov (Arizona) or nmroads.com (New Mexico)',
+  season: {
+    summary: 'Spring (April–May) and October are the sweet spot: mild days at every stop, open roads and good light. March, June, September and November are close behind.',
+    months: ['fair', 'fair', 'good', 'best', 'best', 'good', 'fair', 'fair', 'good', 'best', 'good', 'fair'],
+    notes: [
+      'Summer is hot at the low stops: White Sands averages about 97°F in summer, and Page and Sedona often pass 100°F.',
+      'Monsoon season (early July to mid-October) brings afternoon thunderstorms. Slot-canyon tours at Antelope Canyon are cancelled when flash floods are possible.',
+      'Winter is quiet and cheap, but the Grand Canyon rim, Flagstaff and Sandia Peak get snow and ice, and days are short.',
+      'Antelope Canyon’s famous light beams are strongest around midday from late spring to early fall.',
+      'Spring and fall are busiest at the Grand Canyon and Sedona, so book lodging early.'
+    ],
+    sources: [
+      { label: 'NPS: White Sands basic info', url: 'https://www.nps.gov/whsa/planyourvisit/basicinfo.htm' },
+      { label: 'NPS: Grand Canyon weather', url: 'https://www.nps.gov/grca/planyourvisit/weather-condition.htm' }
+    ]
+  }
 };
 
 window.DAYS = [
@@ -73,10 +90,13 @@ window.DAYS = [
     plan: [
       ['Morning', 'Leave Albuquerque on I-40 west.'],
       ['Lunch', 'Flagstaff, to break up the drive (about 7,000 ft; check for snow on I-40).'],
+      ['Detour', 'Optional: leave I-40 at exit 311 and drive the 28-mile road through Petrified Forest National Park (Painted Desert overlooks, then the giant petrified logs at Rainbow Forest). Rejoin at Holbrook. Adds about 1.5 hours.'],
       ['Mid-afternoon', 'Arrive in Sedona.'],
       ['Sunset', 'Bring the stroller to Tlaquepaque Arts & Shopping Village and wander its car-free, festive paths as the red rocks light up.']
     ],
     stops: [
+      { name: 'Petrified Forest National Park', lat: 35.0657, lon: -109.7814, kind: 'optional', url: 'https://www.nps.gov/pefo/',
+        note: 'Drive-through park on I-40. The short, paved Giant Logs trail behind the Rainbow Forest Museum is easy with kids.' },
       { name: 'Flagstaff (lunch)', lat: 35.1983, lon: -111.6513, kind: 'stretch' },
       { name: 'Tlaquepaque Arts & Shopping Village', lat: 34.8627, lon: -111.7634, kind: 'main' }
     ],
@@ -211,6 +231,8 @@ window.DAYS = [
       { name: 'Downtown Roswell (alien storefronts)', lat: 33.3943, lon: -104.5230, kind: 'main' },
       { name: 'International UFO Museum', lat: 33.3922, lon: -104.5225, kind: 'optional', note: 'Check holiday hours.' },
       { name: 'Carlsbad (lunch)', lat: 32.4207, lon: -104.2288, kind: 'stretch' },
+      { name: 'Carlsbad Caverns National Park', lat: 32.1753, lon: -104.4436, kind: 'optional', url: 'https://www.nps.gov/cave/',
+        note: 'Take the elevator down and walk the Big Room loop (about 1.25 miles, paved). Needs a timed-entry ticket from recreation.gov. Adds 3–4 hours, so it works best with an extra night in Carlsbad.' },
       { name: 'Paisano Pete, Fort Stockton', lat: 30.8846, lon: -102.8790, kind: 'stretch' }
     ],
     hotels: null,

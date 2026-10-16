@@ -51,20 +51,38 @@
     return d.getTime() >= start && d.getTime() < end;
   }
 
-  // Clock offsets from UTC. Arizona (outside the Navajo Nation) stays on standard time all year.
+  // Standard-time offsets from UTC. Arizona (outside the Navajo Nation) stays on standard time all year.
+  var ZONES = {
+    TX: { std: -6, name: 'Texas (Central)' },
+    NM: { std: -7, name: 'New Mexico (Mountain)' },
+    AZ: { std: -7, noDst: true, name: 'Arizona' },
+    CO: { std: -7, name: 'Colorado (Mountain)' },
+    WY: { std: -7, name: 'Wyoming (Mountain)' },
+    SDW: { std: -7, name: 'western South Dakota (Mountain)' },
+    NEC: { std: -6, name: 'central Nebraska (Central)' },
+    KS: { std: -6, name: 'Kansas (Central)' },
+    OK: { std: -6, name: 'Oklahoma (Central)' },
+    LA: { std: -6, name: 'Louisiana (Central)' },
+    MS: { std: -6, name: 'Mississippi (Central)' },
+    AL: { std: -6, name: 'Alabama (Central)' },
+    FLC: { std: -6, name: 'the Florida Panhandle (Central)' },
+    FL: { std: -5, name: 'Florida (Eastern)' }
+  };
+
   function utcOffset(zone, iso) {
-    var dst = isUSDST(iso);
-    if (zone === 'TX') return dst ? -5 : -6;
-    if (zone === 'NM') return dst ? -6 : -7;
-    if (zone === 'AZ') return -7;
-    return null;
+    var z = ZONES[zone];
+    if (!z) return null;
+    return z.std + (!z.noDst && isUSDST(iso) ? 1 : 0);
   }
 
-  var ZONE_NAMES = { TX: 'Texas (Central)', NM: 'New Mexico (Mountain)', AZ: 'Arizona' };
+  var ZONE_NAMES = {};
+  Object.keys(ZONES).forEach(function (k) { ZONE_NAMES[k] = ZONES[k].name; });
 
   // Returns a sentence about the clock change when driving from zone a to zone b, or null.
   function clockChange(a, b, iso) {
     if (!a || !b || a === b) return null;
+    if (utcOffset(a, iso) == null || utcOffset(b, iso) == null) return null;
+    if (ZONES[a].std === ZONES[b].std && !ZONES[a].noDst === !ZONES[b].noDst) return null; // same clock all year
     var diff = utcOffset(b, iso) - utcOffset(a, iso);
     if (diff === 0) return 'Entering ' + ZONE_NAMES[b] + ': no clock change on this date.';
     var n = Math.abs(diff);
@@ -146,16 +164,21 @@
     if (has('tram') && gust >= 35) out.push('Strong gusts: the tram can pause in high wind. Old Town is the backup plan.');
     if (has('dunes') && gust >= 30) out.push('Windy dunes mean blowing sand: bring sunglasses and a stroller cover.');
     if (has('rim') && w.tmin != null && w.tmin <= 40) out.push('Cold on the rim after sunset: pack warm layers and hats for the kids.');
+    else if (has('geyser') && w.tmin != null && w.tmin <= 35) out.push('Freezing morning: geyser steam looks dramatic, but boardwalks can be icy. Stay on them and hold little hands.');
     else if (w.tmin != null && w.tmin <= 35) out.push('Near-freezing night: pack warm layers.');
     if (w.tmax != null && w.tmax >= 90) out.push('Hot afternoon: do outdoor stops early or late, with shade and extra water.');
+    if (has('beach') && (gust >= 25 || pop >= 60)) out.push('Rough beach day possible: check the beach flags (red means dangerous surf and rip currents; double red means the water is closed).');
+    if (has('boat') && gust >= 25) out.push('Breezy on the water: boat tours and ferries can be rough or cancelled. Confirm with the operator that morning.');
+    if (has('alpine') && w.tmax != null && w.tmax <= 50) out.push('High-elevation stop: it will be much colder up top than in town. Bring jackets even in summer.');
     if (!has('slot') && pop >= 50) out.push('Rain likely: keep the backup plan for this day in mind.');
     if (w.code === 95 || w.code === 96 || w.code === 99) out.push('Thunderstorms possible: stay off exposed overlooks and rim edges when you hear thunder.');
     return out;
   }
 
   // Date-dependent notes (closures, seasons) for a day's flags.
-  function seasonNotes(flags, iso) {
+  function seasonNotes(flags, iso, opts) {
     flags = flags || [];
+    opts = opts || {};
     var d = parseISO(iso);
     if (!d) return [];
     var m = d.getUTCMonth() + 1, day = d.getUTCDate();
@@ -169,7 +192,29 @@
       else if (m === 10 && day >= 20) out.push('Cranes may just be arriving at Bosque del Apache (they typically start in late October).');
     }
     var winter = m === 12 || m === 1 || m === 2;
-    if (has('snow') && winter) out.push('Winter driving: check az511.gov (Arizona) or nmroads.com (New Mexico) for snow and ice before you leave.');
+    if (has('snow') && (winter || (opts.snowMonths && opts.snowMonths.indexOf(m) !== -1))) {
+      out.push('Snow and ice are possible: check ' + (opts.roads || 'the state road-conditions site') + ' before you leave.');
+    }
+    if (has('yell-roads')) {
+      if (m >= 11 || m <= 3 || (m === 4 && day < 17)) out.push('Most Yellowstone roads are closed to cars from about Nov 1 to mid-April; only the North–Northeast entrance road stays open. This route won’t work on these dates.');
+      else if (m === 4 || (m === 5 && day < 22)) out.push('Yellowstone roads open in stages from mid-April to late May (the South and East entrances open in May). Check the NPS park roads page.');
+      else if (m === 10) out.push('Late season: Dunraven Pass closes around Oct 12 and most park roads around Oct 31, earlier if it snows. Check the NPS park roads page.');
+    }
+    if (has('trail-ridge') && (m <= 5 || m >= 11 || (m === 10 && day > 15))) {
+      out.push('Trail Ridge Road usually opens around Memorial Day and closes mid-to-late October. Off-season, use Bear Lake Road and the Moraine Park area instead.');
+    }
+    if (has('rmnp') && m >= 5 && m <= 10) out.push('Rocky Mountain National Park usually needs a timed-entry reservation (late May to mid-October). Book it on recreation.gov.');
+    if (has('teton-boat') && (m <= 5 || m >= 10)) out.push('The Jenny Lake shuttle boat runs about late May to late September. Off-season, walk the lakeshore trail instead.');
+    if (has('rodeo') && m >= 6 && m <= 8) out.push('Cody Nite Rodeo runs every evening in summer: an easy, kid-friendly night out.');
+    if (has('hurricane') && m >= 6 && m <= 11) {
+      out.push('Hurricane season (Jun 1–Nov 30' + (m >= 8 && m <= 10 ? ', and this is the peak' : '') + '): check nhc.noaa.gov the week before, and book refundable rooms.');
+    }
+    if (has('gulf-cold') && (m === 12 || m <= 3)) out.push('The Gulf is chilly this time of year: plan on beach walks and shelling more than swimming.');
+    if (has('manatee')) {
+      if (m >= 11 || m <= 3) out.push('Manatee season: they crowd the warm springs on cold mornings. Go early.');
+      else out.push('Manatees are mostly offshore this time of year, so sightings at the springs are hit or miss.');
+    }
+    if (has('spring-break') && m === 3) out.push('Spring break: expect crowds and higher prices. Book rooms early.');
     if (has('rim') && winter) out.push('Winter on the rim: expect icy patches on the Rim Trail and nights well below freezing.');
     if (m === 12 && day === 24) out.push('Christmas Eve: many restaurants close early.');
     if (m === 12 && day === 25) out.push('Christmas Day: many restaurants and some shops are closed. Pack lunch and snacks, and fill up on gas when you can.');

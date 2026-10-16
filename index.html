@@ -486,7 +486,6 @@
 
   <!-- Trip groups are placeholders — tell me your actual trips (place + rough date) and photos, and I'll replace this with the real thing. -->
 
-  <div class="add-note" style="margin-bottom:22px"><strong>Trip planner:</strong> <a href="travel/southwest-road-trip/">Southwest family road trip (Austin → NM/AZ) →</a></div>
 
     <!-- National Parks map: red = parks with a photo in this album (edit NP_VISITED in the script below to add more) -->
   <div class="np" id="np">
@@ -668,7 +667,7 @@
   </div>
 
   <div class="track" id="track-ai">
-    <div class="track-head"><p>Machine learning and AI systems, anchored on the agents course you flagged, from Stanford's public course catalog (CS 329Z is a genuinely new — Fall 2025 — Stanford course; there's no official "AI 101"-style numbering the way EE has 6.xxx, so this list is curated rather than pulled from one program).</p></div>
+    <div class="track-head"><p>Machine learning and AI systems, anchored on an AI agents course, from Stanford's public course catalog (CS 329Z is a genuinely new — Fall 2025 — Stanford course; there's no official "AI 101"-style numbering the way EE has 6.xxx, so this list is curated rather than pulled from one program).</p></div>
 
     <section>
       <p class="kicker">Progress</p>
@@ -721,7 +720,7 @@
   </div>
 
   <div class="track" id="track-dv">
-    <div class="track-head"><p>Design verification for IP blocks — a shared core of UVM methodology, fundamental to advanced, plus a domain tab you pick for IP-specific knowledge (data fabric/CXL, or graphics/GPU), matching real Sr. DV Engineer postings (e.g. AMD Austin). Unlike the EE and AI tracks, most of this isn't university coursework at all — it's industry-standard training and standards-body material, since that's how verification is actually taught.</p></div>
+    <div class="track-head"><p>Design verification for IP blocks — a shared core of UVM methodology, fundamental to advanced, plus a domain tab you pick for IP-specific knowledge (data fabric/CXL, or graphics/GPU), matching what senior DV job postings typically ask for. Unlike the EE and AI tracks, most of this isn't university coursework at all — it's industry-standard training and standards-body material, since that's how verification is actually taught.</p></div>
 
     <section>
       <p class="kicker">Progress — core methodology</p>
@@ -783,41 +782,6 @@
       </div>
     </section>
 
-    <section>
-      <p class="kicker">IP blocks in the job market</p>
-      <p class="section-sub">A snapshot of DV openings by IP block, pulled from each company's own careers site (Sept 2026) — not an exhaustive count, but shows where demand actually clusters.</p>
-      <div class="company-grid">
-        <div class="company-card">
-          <h3>AMD</h3>
-          <ul class="ip-list">
-            <li><a href="https://jobs.amd.com/job/Austin-Design-Verification-Engineer-Graphics-IP-183227-Texa/935309500/" target="_blank" rel="noopener">Graphics IP</a><span class="ip-note">Austin — matches the Graphics IP domain tab above</span></li>
-            <li><span class="plain">CPU / CPU Core</span><span class="ip-note">Multiple open reqs — Bangalore, Cambridge, Boxborough, Fishkill; includes a "Core Enablement" variant</span></li>
-            <li><a href="https://zapply.jobs/jobs/9d4ac799-ceb7-4b50-a3cf-590a2ec48635/" target="_blank" rel="noopener">Memory Controller</a><span class="ip-note">Lead-level, San Jose</span></li>
-            <li><span class="plain">Memory Subsystem</span><span class="ip-note">Austin</span></li>
-            <li><a href="https://careers.amd.com/careers-home/jobs/89120?lang=en-us" target="_blank" rel="noopener">PCIe</a><span class="ip-note">Staff-level, Cork, Ireland</span></li>
-            <li><a href="https://www.linkedin.com/jobs/view/infinity-fabric-verification-engineer-at-amd-3551103056" target="_blank" rel="noopener">Infinity Fabric</a><span class="ip-note">AMD's proprietary interconnect — closest thing to a CXL/data-fabric role; Santa Clara</span></li>
-            <li><a href="https://careers.amd.com/careers-home/jobs/80797?lang=en-us" target="_blank" rel="noopener">Formal verification</a><span class="ip-note">Cross-cutting methodology, not one IP block — Austin</span></li>
-            <li><span class="plain">General ASIC / SoC</span><span class="ip-note">Not tied to a named block — most common posting type, including the one you originally found</span></li>
-          </ul>
-        </div>
-        <div class="company-card">
-          <h3>NVIDIA</h3>
-          <ul class="ip-list">
-            <li><a href="https://jobs.nvidia.com/careers/job/893395449453" target="_blank" rel="noopener">GPU core / GPU Fullchip</a><span class="ip-note">Matches the Graphics IP domain tab above</span></li>
-            <li><a href="https://nvidia.eightfold.ai/careers/job/893394750744" target="_blank" rel="noopener">GPU Memory Subsystem</a><span class="ip-note">Senior-level</span></li>
-            <li><a href="https://jobs.nvidia.com/careers/job/893396268624" target="_blank" rel="noopener">Memory Controller</a><span class="ip-note">Senior-level, general (not GPU-specific)</span></li>
-            <li><a href="https://jobs.nvidia.com/careers/job/893394864388" target="_blank" rel="noopener">Memory Subsystem</a><span class="ip-note">Senior-level, general</span></li>
-            <li><a href="https://jobs.nvidia.com/careers/job/893393647441" target="_blank" rel="noopener">CPU</a><span class="ip-note">Their Grace CPU line</span></li>
-            <li><a href="https://jobs.nvidia.com/careers/job/893396863951-tech-lead-ethernet-networking-verification-engineer-us-tx-austin" target="_blank" rel="noopener">Ethernet Networking</a><span class="ip-note">Tech Lead level, Austin, TX</span></li>
-            <li><span class="plain">General ASIC</span><span class="ip-note">New-grad and generalist roles not tied to one block</span></li>
-          </ul>
-        </div>
-      </div>
-      <div class="plan-note" style="margin-top:16px">
-        <h3>Pattern worth noting</h3>
-        <p style="margin:0">Neither company lists a job titled "CXL" or "Data Fabric" directly — AMD's closest equivalent is <strong>Infinity Fabric</strong> (their proprietary interconnect, CXL-adjacent conceptually), and CXL-specific knowledge most likely lives inside <strong>Memory Controller</strong> or <strong>Memory Subsystem</strong> postings rather than having its own title. Graphics IP, CPU, and Memory Subsystem/Controller are the three blocks with the most consistent openings at both companies — which lines up with the Graphics IP domain tab above, and suggests Memory Controller/Infinity Fabric framing is more realistic than searching "CXL" by name.</p>
-      </div>
-    </section>
 
     <section>
       <p class="kicker">Suggested sequencing</p>
@@ -825,7 +789,7 @@
       <div class="plan-note">
         <h3>Core, then one domain</h3>
         <ol>
-          <li><span class="phase-label">1. Architecture prerequisites</span> — <span class="phase-courses">6.004 → 6.823 → 6.111 (optional if your job already covers hands-on RTL)</span>. This is what turns UVM from a mechanical skill into a diagnostic one — the vocabulary (pipelines, caching, coherency, OoO) that verification test plans are actually built around. Likely partially covered already by your GPU validation experience.</li>
+          <li><span class="phase-label">1. Architecture prerequisites</span> — <span class="phase-courses">6.004 → 6.823 → 6.111 (optional with hands-on RTL experience)</span>. This is what turns UVM from a mechanical skill into a diagnostic one — the vocabulary (pipelines, caching, coherency, OoO) that verification test plans are actually built around.</li>
           <li><span class="phase-label">2. Verification methodology</span> — <span class="phase-courses">SystemVerilog fundamentals → UVM Verification Primer → Verification Academy UVM Framework</span>. The mechanical skill — testbenches, sequences, drivers, monitors, scoreboards — and it transfers regardless of which IP you end up verifying. Matches "UVM-based testbenches" in most Sr. DV postings directly.</li>
           <li><span class="phase-label">3. Power-aware verification</span> — <span class="phase-courses">Accellera UPF Tutorial → Verification Academy Power Aware Verification</span>. Layers on top of plain UVM once it's solid — relevant to power management specifically.</li>
           <li><span class="phase-label">4. Modeling & HLS</span> — <span class="phase-courses">Doulos SystemC/TLM Tutorial → MIT 6.375 (Complex Digital Systems)</span>. SystemC/TLM shows up explicitly in job postings as "SystemC, TLM, and related modeling approaches"; 6.375 (the current name for 6.884, already in your EE track) covers HLS-style hardware description directly.</li>
@@ -835,12 +799,11 @@
       <div class="plan-note" style="margin-top:16px">
         <h3>A few thoughts</h3>
         <ol>
-          <li><strong>You don't need to finish the EE track first</strong> — the architecture prerequisites above (6.004/6.823/6.111) are included directly in this core roadmap so DV can run on its own, without waiting on the full EE sequence. Skip any you're already solid on from your current GPU validation role.</li>
+          <li><strong>You don't need to finish the EE track first</strong> — the architecture prerequisites above (6.004/6.823/6.111) are included directly in this core roadmap so DV can run on its own, without waiting on the full EE sequence. Skip any you're already solid on.</li>
           <li><strong>Core before domain</strong> — UVM skill transfers across companies and IP; CXL- or graphics-specific knowledge only pays off once you can actually build a testbench to apply it in.</li>
-          <li><strong>Real postings (e.g. AMD's Sr. Silicon DV Engineer, graphics IP, Austin) explicitly list</strong> UVM-based testbenches, Verilog/SystemVerilog/C/C++, graphics pipeline architecture, and SystemC/TLM — the core roadmap is built to hit each of those directly, with the domain tabs layered on top for the specific IP you're aiming at.</li>
+          <li><strong>Typical senior DV postings list</strong> UVM-based testbenches, Verilog/SystemVerilog/C/C++, graphics pipeline architecture, and SystemC/TLM — the core roadmap is built to hit each of those directly, with the domain tabs layered on top for the specific IP you're aiming at.</li>
           <li><strong>CXL builds on PCIe</strong> — there's no single canonical open PCIe course, but a working understanding of PCIe transaction layers pays off before the CXL-specific material clicks fully.</li>
           <li>Most of the methodology/domain rows are industry material rather than academic courseware (Doulos, ChipVerify, Verification Academy, Accellera, the CXL Consortium) — expect hands-on tutorials and standards docs more than lecture videos, and expect some to assume you're already applying it against real RTL.</li>
-          <li>You mentioned you can source your own UVM material — swap any of the core rows below for whatever you're actually using; the tiers/sequencing still apply.</li>
         </ol>
       </div>
     </section>
@@ -852,7 +815,7 @@
   </div>
 
   <div class="track" id="track-rtl">
-    <div class="track-head"><p>RTL/logic design for GPU and AI processor IP — actually writing and implementing the logic, upstream of and complementary to the DV track. Built directly from a real posting: AMD's <a href="https://careers.amd.com/careers-home/jobs/91519?lang=en-us" target="_blank" rel="noopener">Graphics &amp; AI Processor Design Engineer</a>, Austin — designing the GPU command processor (front-end of the GPU pipeline) and next-gen AI engine logic.</p></div>
+    <div class="track-head"><p>RTL/logic design for GPU and AI processor IP — actually writing and implementing the logic, upstream of and complementary to the DV track. Modeled on typical graphics &amp; AI processor design roles — e.g. designing a GPU command processor (front-end of the GPU pipeline) and AI engine logic.</p></div>
 
     <section>
       <p class="kicker">Progress</p>
@@ -873,7 +836,7 @@
         <thead><tr><th></th><th>#</th><th>Course</th><th>Priority</th></tr></thead>
         <tbody id="course-table-rtl"></tbody>
       </table>
-      <div class="pending" style="margin-top:16px"><strong>EDA tool proficiency (VCS, Cadence, Mentor Graphics)</strong> is explicitly listed in the posting but isn't open courseware — it's tool-specific, vendor-licensed software usually learned through a company's own training once you have access. Not tracked as a course here; worth noting as a real gap between self-study and the actual job.</div>
+      <div class="pending" style="margin-top:16px"><strong>EDA tool proficiency (VCS, Cadence, Mentor Graphics)</strong> is commonly listed in RTL design postings but isn't open courseware — it's tool-specific, vendor-licensed software usually learned through a company's own training once you have access. Not tracked as a course here; worth noting as a real gap between self-study and the actual job.</div>
     </section>
 
     <section>
@@ -882,20 +845,19 @@
       <div class="plan-note">
         <h3>Four phases</h3>
         <ol>
-          <li><span class="phase-label">1. Digital design foundations</span> — <span class="phase-courses">6.004 → HDLBits → Verilog/SystemVerilog RTL (ChipVerify) → 6.111 → 6.823 → 6.374</span>. Logic, then actual Verilog fluency, hands-on RTL, architecture/pipelines (directly relevant to designing a command processor), and CMOS/VLSI timing & power, which the posting names explicitly ("high performance, lower power, meet timing requirements").</li>
-          <li><span class="phase-label">2. RTL sign-off skills</span> — <span class="phase-courses">Clock Domain Crossing (CDC) → LINT / RTL sign-off checks → Static Timing Analysis fundamentals</span>. Matches the posting's "design rule checks to finish tape-out sign-off, including LINT, CDC etc." almost word for word. Then a light pass of UVM (Doulos primer) so you can read DV's testbenches and write code that's easy to verify — the posting asks you to "coordinate with verification engineer" and mentions VCS and functional verification tools.</li>
+          <li><span class="phase-label">1. Digital design foundations</span> — <span class="phase-courses">6.004 → HDLBits → Verilog/SystemVerilog RTL (ChipVerify) → 6.111 → 6.823 → 6.374</span>. Logic, then actual Verilog fluency, hands-on RTL, architecture/pipelines (directly relevant to designing a command processor), and CMOS/VLSI timing & power, which RTL design postings name explicitly ("high performance, lower power, meet timing requirements").</li>
+          <li><span class="phase-label">2. RTL sign-off skills</span> — <span class="phase-courses">Clock Domain Crossing (CDC) → LINT / RTL sign-off checks → Static Timing Analysis fundamentals</span>. Matches the typical posting language "design rule checks to finish tape-out sign-off, including LINT, CDC etc." almost word for word. Then a light pass of UVM (Doulos primer) so you can read DV's testbenches and write code that's easy to verify — postings typically ask you to "coordinate with verification engineer" and mentions VCS and functional verification tools.</li>
           <li><span class="phase-label">3. Advanced RTL</span> — <span class="phase-courses">MIT 6.375 (Complex Digital Systems / HLS)</span>. Already in your EE track as 6.884 — no need to redo if you've covered it there.</li>
-          <li><span class="phase-label">4. GPU & AI domain knowledge</span> — <span class="phase-courses">MIT 6.837 (Computer Graphics) → UPenn CIS 565 (GPU Architecture) → MIT 6.5940 EfficientML.ai (TinyML and Efficient Deep Learning Computing)</span>. The posting's title is "Graphics <strong>&amp;</strong> AI Processor" — 6.5940 covers the AI-accelerator half specifically (quantization, efficient inference, model compression) that the graphics-only courses don't touch.</li>
+          <li><span class="phase-label">4. GPU & AI domain knowledge</span> — <span class="phase-courses">MIT 6.837 (Computer Graphics) → UPenn CIS 565 (GPU Architecture) → MIT 6.5940 EfficientML.ai (TinyML and Efficient Deep Learning Computing)</span>. For a "Graphics <strong>&amp;</strong> AI Processor" role, 6.5940 covers the AI-accelerator half specifically (quantization, efficient inference, model compression) that the graphics-only courses don't touch.</li>
         </ol>
       </div>
       <div class="plan-note" style="margin-top:16px">
         <h3>A few thoughts</h3>
         <ol>
-          <li><strong>This is a design role, not a verification role</strong> — the posting asks you to "coordinate with verification engineer," not be one. It still benefits from DV-track knowledge (you'll work with DV engineers constantly and want to write code that's easy to verify), but the core skill here is implementing logic, not testing it.</li>
+          <li><strong>This is a design role, not a verification role</strong> — postings typically ask you to "coordinate with verification engineer," not be one. It still benefits from DV-track knowledge (you'll work with DV engineers constantly and want to write code that's easy to verify), but the core skill here is implementing logic, not testing it.</li>
           <li><strong>Heavy overlap with your EE track</strong> — the 6.004/6.111/6.823/6.374 rows are the same courses already in the EE roadmap. If you've made progress there, you're already most of the way through this track's foundation. The Verilog rows (HDLBits, ChipVerify) are new here — the EE track leans on 6.111 to teach Verilog implicitly.</li>
-          <li><strong>CDC and LINT are named explicitly in the posting</strong> — these are sign-off checks every RTL designer needs to pass before tapeout, and they're genuinely learnable from free references (ChipVerify, open guides) rather than requiring an expensive course.</li>
-          <li><strong>"AI Processor" is the differentiator</strong> — a generic GPU design background covers the graphics half; 6.5940 (EfficientML.ai, MIT HAN Lab, free on YouTube) is what covers the AI-accelerator half the title calls out specifically.</li>
-          <li>No visa sponsorship on this particular posting, per the listing — worth knowing if that's a factor for you.</li>
+          <li><strong>CDC and LINT are named explicitly in RTL design postings</strong> — these are sign-off checks every RTL designer needs to pass before tapeout, and they're genuinely learnable from free references (ChipVerify, open guides) rather than requiring an expensive course.</li>
+          <li><strong>"AI Processor" is the differentiator</strong> — a generic GPU design background covers the graphics half; 6.5940 (EfficientML.ai, MIT HAN Lab, free on YouTube) is what covers the AI-accelerator half of such roles.</li>
         </ol>
       </div>
     </section>
@@ -991,7 +953,7 @@
       courses: [
         {n:1, name:"6.004 Computation Structures", subject:"Digital logic, CPU, hardware systems — shared with EE track <span class=\"alt\">· Alt: <a href=\"https://archive.org/details/ucberkeley_webcast_31r9tQvYn2g\" target=\"_blank\" rel=\"noopener\">UC Berkeley CS61C</a></span>", tier:"must"},
         {n:2, name:"6.823 Computer System Architecture", subject:"Pipelines, cache, OoO, coherency — what test plans are built around; shared with EE track <span class=\"alt\">· Alt: <a href=\"https://www.youtube.com/user/cmu18447\" target=\"_blank\" rel=\"noopener\">CMU 18-447</a></span>", tier:"must"},
-        {n:3, name:"6.111 Introductory Digital Systems Laboratory", subject:"Hands-on RTL/FPGA, timing, FSMs — skip if your job already covers this; shared with EE track <span class=\"alt\">· Alt: <a href=\"https://www.coursera.org/learn/build-a-computer\" target=\"_blank\" rel=\"noopener\">Nand2Tetris</a></span>", tier:"strong"},
+        {n:3, name:"6.111 Introductory Digital Systems Laboratory", subject:"Hands-on RTL/FPGA, timing, FSMs — skip with prior hands-on RTL experience; shared with EE track <span class=\"alt\">· Alt: <a href=\"https://www.coursera.org/learn/build-a-computer\" target=\"_blank\" rel=\"noopener\">Nand2Tetris</a></span>", tier:"strong"},
         {n:4, name:"SystemVerilog Fundamentals (ChipVerify)", subject:"Language basics: assertions, classes, randomization", tier:"must"},
         {n:5, name:"UVM Verification Primer (Doulos)", subject:"UVM testbench architecture: sequences, drivers, monitors, scoreboards", tier:"must"},
         {n:6, name:"Verification Academy — UVM Framework", subject:"Coverage-driven verification, deeper UVM methodology", tier:"strong"},
@@ -1026,8 +988,8 @@
         {n:4, name:"6.111 Introductory Digital Systems Laboratory", subject:"Hands-on RTL/FPGA, timing, FSMs — shared with EE track <span class=\"alt\">· Alt: <a href=\"https://www.coursera.org/learn/build-a-computer\" target=\"_blank\" rel=\"noopener\">Nand2Tetris</a></span>", tier:"must"},
         {n:5, name:"6.823 Computer System Architecture", subject:"Pipelines, scheduling — directly relevant to designing a command processor; shared with EE track <span class=\"alt\">· Alt: <a href=\"https://www.youtube.com/user/cmu18447\" target=\"_blank\" rel=\"noopener\">CMU 18-447</a></span>", tier:"must"},
         {n:6, name:"6.374 Analysis and Design of Digital ICs", subject:"CMOS/VLSI, timing, power — \"high performance, lower power, meet timing\"; shared with EE track <span class=\"alt\">· Alt: <a href=\"https://inst.eecs.berkeley.edu/~cs250/fa10/\" target=\"_blank\" rel=\"noopener\">UC Berkeley CS250</a></span>", tier:"must"},
-        {n:7, name:"Clock Domain Crossing (CDC) — ChipVerify / thedatabus guide", subject:"CDC design & verification techniques — named directly in the posting", tier:"must"},
-        {n:8, name:"LINT / RTL sign-off checks", subject:"Static RTL rule checking before tapeout sign-off — named directly in the posting", tier:"strong"},
+        {n:7, name:"Clock Domain Crossing (CDC) — ChipVerify / thedatabus guide", subject:"CDC design & verification techniques — named directly in RTL design postings", tier:"must"},
+        {n:8, name:"LINT / RTL sign-off checks", subject:"Static RTL rule checking before tapeout sign-off — named directly in RTL design postings", tier:"strong"},
         {n:9, name:"Static Timing Analysis (STA) fundamentals", subject:"Timing closure — open STA course/reference material", tier:"strong"},
         {n:10, name:"UVM Verification Primer (Doulos)", subject:"Enough UVM to read and extend testbenches and work with DV engineers — shared with DV track <span class=\"alt\">· <a href=\"https://www.doulos.com/knowhow/systemverilog/uvm/uvm-verification-primer/\" target=\"_blank\" rel=\"noopener\">Doulos primer</a></span>", tier:"useful"},
         {n:11, name:"MIT 6.375 Complex Digital Systems (HLS)", subject:"High-level synthesis, Bluespec — already in EE track as 6.884", tier:"useful"},

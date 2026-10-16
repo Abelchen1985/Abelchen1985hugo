@@ -4,11 +4,11 @@
 
 window.TRIP = {
   id: 'ys',
-  title: 'Yellowstone & Rockies Family Road Trip',
-  subtitle: 'Austin → Rocky Mountain → Grand Teton → Yellowstone → Black Hills → Badlands → Austin · 13 days, family-paced',
+  title: 'Yellowstone & Grand Teton Family Road Trip',
+  subtitle: 'Austin → Grand Teton → Yellowstone → Cody → Cheyenne → Austin · 10 days, family-paced',
   defaultStart: null,
   home: { name: 'Austin, TX', lat: 30.2672, lon: -97.7431 },
-  roads: 'cotrip.org (Colorado), wyoroad.info (Wyoming) and sd511.org (South Dakota)',
+  roads: 'cotrip.org (Colorado) and wyoroad.info (Wyoming)',
   snowMonths: [3, 4, 5, 10, 11],
   season: {
     summary: 'Mid-June to mid-July and September. Every park road is open then; September brings thinner crowds, cool days and the elk rut.',
@@ -17,13 +17,12 @@ window.TRIP = {
     notes: [
       'Yellowstone roads open to cars in stages: the first in mid-April, the South and East entrances in May, and Dunraven Pass around late May. Most roads close around Oct 31 (Dunraven Pass around Oct 12).',
       'November to mid-April, only the North–Northeast entrance road is open to cars, so this route doesn’t work.',
-      'Trail Ridge Road in Rocky Mountain National Park usually runs from about Memorial Day to mid-October, and the park needs timed-entry reservations in that window.',
       'July and August are the most crowded months: book in-park lodging as far ahead as you can (often up to a year).',
       'Snow can fall in any month at Yellowstone’s elevation (7,000–8,000 ft). Pack layers even in July.'
     ],
     sources: [
       { label: 'NPS: Yellowstone park roads', url: 'https://www.nps.gov/yell/planyourvisit/parkroads.htm' },
-      { label: 'NPS: Rocky Mountain timed entry', url: 'https://www.nps.gov/romo/planyourvisit/timed-entry-permit-system.htm' }
+      { label: 'NPS: Grand Teton', url: 'https://www.nps.gov/grte/' }
     ]
   }
 };
@@ -85,48 +84,21 @@ window.DAYS = [
     flags: ['snow']
   },
   {
-    n: 3, title: 'Colorado Springs to Rocky Mountain National Park', color: '#a16207',
-    drive: '~2.5 hrs', driveNote: 'est.', zones: ['CO', 'CO'],
-    wx: { label: 'Estes Park', lat: 40.3772, lon: -105.5217, tz: 'America/Denver' },
-    route: [[38.8339, -104.8214], [39.7392, -104.9903], [40.1672, -105.1019], [40.3772, -105.5217], [40.3123, -105.6450]],
+    n: 3, title: 'Colorado Springs to Rawlins', color: '#a16207',
+    drive: '~5.5 hrs', driveNote: 'est.', zones: ['CO', 'WY'],
+    wx: { label: 'Laramie', lat: 41.3114, lon: -105.5911, tz: 'America/Denver' },
+    route: [[38.8339, -104.8214], [39.7392, -104.9903], [40.5853, -105.0844], [41.1586, -105.3780], [41.3114, -105.5911], [41.7911, -107.2387]],
     plan: [
       ['Morning', 'Optional: drive or take the cog railway up Pikes Peak (14,115 ft) before you leave. Book the railway ahead.'],
-      ['Midday', 'North past Denver to Estes Park.'],
-      ['Afternoon', 'Rocky Mountain National Park: Bear Lake (a flat, half-mile loop) and elk grazing in Moraine Park. Use your timed-entry slot.'],
-      ['Evening', 'Stroll the Estes Park riverwalk. Elk often wander through town at dusk.']
+      ['Midday', 'North past Denver and Fort Collins into Wyoming.'],
+      ['Afternoon', 'Vedauwoo, just off I-80: giant granite boulders kids can scramble on, with picnic tables.'],
+      ['Evening', 'West across the Laramie plains to Rawlins.']
     ],
     stops: [
       { name: 'Pikes Peak', lat: 38.8409, lon: -105.0442, kind: 'optional', url: 'https://www.cograilway.com/',
         note: 'Cold and windy at the top even in summer; altitude can bother little ones.' },
-      { name: 'Bear Lake, Rocky Mountain National Park', lat: 40.3123, lon: -105.6450, kind: 'main', url: 'https://www.nps.gov/romo/',
-        note: 'Parking fills early. The park shuttle from the Park & Ride is easier.' },
-      { name: 'Moraine Park', lat: 40.3555, lon: -105.5900, kind: 'main' }
-    ],
-    hotels: {
-      area: 'Estes Park, right outside the Beaver Meadows entrance',
-      options: [
-        { name: 'Family hotels and cabins in Estes Park', q: 'family hotels cabins Estes Park CO' },
-        { name: 'The Stanley Hotel', q: 'The Stanley Hotel Estes Park' }
-      ]
-    },
-    flags: ['rmnp', 'alpine', 'snow']
-  },
-  {
-    n: 4, title: 'Trail Ridge Road, then on to Rawlins', color: '#4d7c0f',
-    drive: '~5 hrs + park time', driveNote: 'est.', zones: ['CO', 'WY'],
-    wx: { label: 'Alpine Visitor Center (Trail Ridge)', lat: 40.4415, lon: -105.7535, tz: 'America/Denver' },
-    route: [[40.3772, -105.5217], [40.4415, -105.7535], [40.3772, -105.5217], [40.5853, -105.0844], [41.3114, -105.5911], [41.7911, -107.2387]],
-    plan: [
-      ['Early', 'Drive Trail Ridge Road, the highest continuous paved road in the U.S. (12,183 ft), to the Alpine Visitor Center and back. Watch for elk and marmots above the tree line.'],
-      ['Late morning', 'Back down to Estes Park, then north through Fort Collins.'],
-      ['Afternoon', 'West on I-80 over the Laramie plains. Optional stop at Vedauwoo for kid-friendly granite boulders.'],
-      ['Evening', 'Overnight in Rawlins.']
-    ],
-    stops: [
-      { name: 'Alpine Visitor Center', lat: 40.4415, lon: -105.7535, kind: 'main',
-        note: 'At 11,796 ft it is often 20–30°F colder than Estes Park, with thin air. Take it slow with kids.' },
-      { name: 'Vedauwoo Recreation Area', lat: 41.1586, lon: -105.3780, kind: 'optional' },
-      { name: 'Laramie (lunch)', lat: 41.3114, lon: -105.5911, kind: 'stretch' }
+      { name: 'Fort Collins (lunch)', lat: 40.5853, lon: -105.0844, kind: 'stretch' },
+      { name: 'Vedauwoo Recreation Area', lat: 41.1586, lon: -105.3780, kind: 'main' }
     ],
     hotels: {
       area: 'Rawlins, right on I-80',
@@ -134,10 +106,10 @@ window.DAYS = [
         { name: 'Hotels in Rawlins', q: 'hotels Rawlins WY' }
       ]
     },
-    flags: ['trail-ridge', 'rmnp', 'alpine', 'snow']
+    flags: ['alpine', 'snow']
   },
   {
-    n: 5, title: 'Rawlins to Grand Teton and Jackson', color: '#0f766e',
+    n: 4, title: 'Rawlins to Grand Teton and Jackson', color: '#0f766e',
     drive: '~5 hrs', driveNote: 'est.', zones: ['WY', 'WY'],
     wx: { label: 'Grand Teton / Jenny Lake', lat: 43.7516, lon: -110.7224, tz: 'America/Denver' },
     route: [[41.7911, -107.2387], [42.8330, -108.7307], [43.5333, -109.6304], [43.8406, -110.5100], [43.7516, -110.7224], [43.4799, -110.7624]],
@@ -163,7 +135,7 @@ window.DAYS = [
     flags: ['teton-boat', 'snow']
   },
   {
-    n: 6, title: 'Grand Teton to Old Faithful', color: '#0369a1',
+    n: 5, title: 'Grand Teton to Old Faithful', color: '#0369a1',
     drive: '~2.5 hrs + stops', driveNote: 'est.', zones: ['WY', 'WY'],
     wx: { label: 'Old Faithful', lat: 44.4605, lon: -110.8281, tz: 'America/Denver' },
     route: [[43.4799, -110.7624], [43.6633, -110.6627], [43.8662, -110.5492], [44.1338, -110.6655], [44.4168, -110.5739], [44.4605, -110.8281]],
@@ -191,7 +163,7 @@ window.DAYS = [
     flags: ['yell-roads', 'geyser', 'snow']
   },
   {
-    n: 7, title: 'Grand Prismatic to Canyon Village', color: '#7c3aed',
+    n: 6, title: 'Grand Prismatic to Canyon Village', color: '#7c3aed',
     drive: '~1.5 hrs + stops', driveNote: 'est.', zones: ['WY', 'WY'],
     wx: { label: 'Canyon Village', lat: 44.7350, lon: -110.4880, tz: 'America/Denver' },
     route: [[44.4605, -110.8281], [44.5251, -110.8381], [44.6455, -110.8613], [44.7262, -110.7036], [44.7350, -110.4880]],
@@ -217,7 +189,7 @@ window.DAYS = [
     flags: ['yell-roads', 'geyser', 'snow']
   },
   {
-    n: 8, title: 'Hayden Valley to Cody', color: '#be123c',
+    n: 7, title: 'Hayden Valley to Cody', color: '#be123c',
     drive: '~3 hrs + wildlife stops', driveNote: 'est.', zones: ['WY', 'WY'],
     wx: { label: 'Cody', lat: 44.5263, lon: -109.0565, tz: 'America/Denver' },
     route: [[44.7350, -110.4880], [44.6600, -110.4700], [44.5640, -110.3800], [44.4888, -110.0047], [44.5000, -109.1800], [44.5263, -109.0565]],
@@ -243,124 +215,69 @@ window.DAYS = [
     flags: ['yell-roads', 'rodeo', 'snow']
   },
   {
-    n: 9, title: 'Cody to Devils Tower and the Black Hills', color: '#15803d',
-    drive: '~7.5 hrs', driveNote: 'est.', zones: ['WY', 'SDW'],
-    wx: { label: 'Devils Tower', lat: 44.5902, lon: -104.7146, tz: 'America/Denver' },
-    route: [[44.5263, -109.0565], [44.4889, -108.0565], [44.5876, -107.6217], [44.7972, -106.9562], [44.2911, -105.5022], [44.5902, -104.7146], [44.4908, -103.8594], [44.0805, -103.2310]],
+    n: 8, title: 'Cody to Cheyenne', color: '#15803d',
+    drive: '~6.5 hrs', driveNote: 'est.', zones: ['WY', 'WY'],
+    wx: { label: 'Thermopolis', lat: 43.6461, lon: -108.2121, tz: 'America/Denver' },
+    route: [[44.5263, -109.0565], [43.6461, -108.2121], [43.4200, -108.1700], [42.8666, -106.3131], [42.0625, -104.1844], [41.1400, -104.8202]],
     plan: [
-      ['Early', 'East over the Bighorn Mountains on US-14. Stop at Shell Falls to stretch.'],
-      ['Midday', 'Lunch in Sheridan, then on through Gillette.'],
-      ['Afternoon', 'Devils Tower National Monument, the first U.S. national monument. Walk the paved 1.3-mile Tower Trail and look for climbers. Prairie dogs line the entrance road.'],
-      ['Evening', 'Through Spearfish to Rapid City. This is the longest day, so keep the evening easy.']
+      ['Morning', 'South to Thermopolis: soak in the free state bathhouse at Hot Springs State Park and walk the swinging bridge over the steaming terraces.'],
+      ['Late morning', 'Through Wind River Canyon, with cliffs over the river and signs naming each rock layer by age.'],
+      ['Midday', 'Lunch in Casper.'],
+      ['Afternoon', 'Optional: Fort Laramie National Historic Site, a restored 1800s fur-trade and army fort on the Oregon Trail (about a 1-hour detour). Then on to Cheyenne.']
     ],
     stops: [
-      { name: 'Shell Falls', lat: 44.5876, lon: -107.6217, kind: 'stretch' },
-      { name: 'Sheridan (lunch)', lat: 44.7972, lon: -106.9562, kind: 'stretch' },
-      { name: 'Devils Tower National Monument', lat: 44.5902, lon: -104.7146, kind: 'main', url: 'https://www.nps.gov/deto/' }
+      { name: 'Hot Springs State Park, Thermopolis', lat: 43.6540, lon: -108.1970, kind: 'main', url: 'https://wyoparks.wyo.gov/index.php/places-to-go/hot-springs',
+        note: 'The State Bath House is free (time limit applies). Keep kids on the boardwalks around the terraces.' },
+      { name: 'Wind River Canyon', lat: 43.4200, lon: -108.1700, kind: 'main' },
+      { name: 'Casper (lunch)', lat: 42.8666, lon: -106.3131, kind: 'stretch' },
+      { name: 'Fort Laramie National Historic Site', lat: 42.2030, lon: -104.5570, kind: 'optional', url: 'https://www.nps.gov/fola/' }
     ],
     hotels: {
-      area: 'Rapid City, the gateway to the Black Hills',
+      area: 'Cheyenne, right on I-25',
       options: [
-        { name: 'Family hotels in Rapid City', q: 'family hotels Rapid City SD' }
+        { name: 'Family hotels in Cheyenne', q: 'family hotels Cheyenne WY' }
       ]
     },
     flags: ['snow']
   },
   {
-    n: 10, title: 'Mount Rushmore, Custer State Park and Wind Cave', color: '#9333ea',
-    drive: '~2 hrs + stops', driveNote: 'est.', zones: ['SDW', 'SDW'],
-    wx: { label: 'Custer State Park', lat: 43.7230, lon: -103.4000, tz: 'America/Denver' },
-    route: [[44.0805, -103.2310], [43.8791, -103.4591], [43.8100, -103.4000], [43.7230, -103.4000], [43.5560, -103.4780], [43.7666, -103.5988]],
+    n: 9, title: 'Cheyenne to Amarillo', color: '#9333ea',
+    drive: '~8.5 hrs', driveNote: 'est.', zones: ['WY', 'TX'],
+    wx: { label: 'Lamar, CO', lat: 38.0872, lon: -102.6208, tz: 'America/Denver' },
+    route: [[41.1400, -104.8202], [39.7392, -104.9903], [39.2639, -103.6922], [38.0872, -102.6208], [36.7295, -102.5132], [35.8656, -101.9732], [35.2220, -101.8313]],
     plan: [
-      ['Morning', 'Mount Rushmore National Memorial: walk the Presidential Trail for close-up views of the faces.'],
-      ['Late morning', 'Iron Mountain Road, with its pigtail bridges and tunnels framing Rushmore.'],
-      ['Afternoon', 'Custer State Park Wildlife Loop: bison, pronghorn and the famous “begging burros.” Then a ranger-led tour at Wind Cave National Park, one of the longest caves in the world.'],
-      ['Evening', 'Overnight in Custer or Hill City.']
+      ['Early', 'South past Denver, then southeast on US-287 across the plains: a new road home rather than repeating I-25.'],
+      ['Midday', 'Lunch in Lamar. Optional: Bent’s Old Fort National Historic Site near La Junta, a rebuilt 1830s adobe trading post (about a 1-hour detour).'],
+      ['Afternoon', 'Through the Oklahoma Panhandle into Texas. You lose an hour entering Central Time.'],
+      ['Evening', 'Overnight in Amarillo. This is the longest day, so keep the evening easy.']
     ],
     stops: [
-      { name: 'Mount Rushmore National Memorial', lat: 43.8791, lon: -103.4591, kind: 'main', url: 'https://www.nps.gov/moru/',
-        note: 'No entry fee, but parking is paid. In summer there is an evening lighting ceremony.' },
-      { name: 'Custer State Park Wildlife Loop', lat: 43.7230, lon: -103.4000, kind: 'main', url: 'https://gfp.sd.gov/parks/detail/custer-state-park/',
-        note: 'Needs a state park entrance license. Never feed or pet the burros or bison.' },
-      { name: 'Wind Cave National Park', lat: 43.5560, lon: -103.4780, kind: 'main', url: 'https://www.nps.gov/wica/',
-        note: 'Cave tours are ranger-led only; buy tickets on recreation.gov or early at the visitor center. Strollers are not allowed in the cave.' },
-      { name: 'Crazy Horse Memorial', lat: 43.8366, lon: -103.6236, kind: 'optional' }
+      { name: 'Limon (rest stop)', lat: 39.2639, lon: -103.6922, kind: 'stretch' },
+      { name: 'Bent’s Old Fort National Historic Site', lat: 38.0403, lon: -103.4297, kind: 'optional', url: 'https://www.nps.gov/beol/' },
+      { name: 'Lamar (lunch)', lat: 38.0872, lon: -102.6208, kind: 'stretch' }
     ],
     hotels: {
-      area: 'Custer or Hill City, in the middle of the Black Hills',
+      area: 'Amarillo along I-40',
       options: [
-        { name: 'Lodges inside Custer State Park', q: 'Custer State Park Resort lodges' },
-        { name: 'Family hotels in Custer', q: 'family hotels Custer SD' }
+        { name: 'Family hotels on I-40 West, Amarillo', q: 'family hotels I-40 West Amarillo TX' }
       ]
     },
     flags: ['snow']
   },
   {
-    n: 11, title: 'Badlands National Park to North Platte', color: '#db2777',
-    drive: '~6.5 hrs', driveNote: 'est.', zones: ['SDW', 'NEC'],
-    wx: { label: 'Badlands', lat: 43.7497, lon: -101.9405, tz: 'America/Denver' },
-    route: [[43.7666, -103.5988], [43.9925, -102.2416], [43.8800, -102.2300], [43.7497, -101.9405], [43.1700, -101.7300], [42.8728, -100.5510], [41.1239, -100.7654]],
+    n: 10, title: 'Amarillo to Austin', color: '#0e7490',
+    drive: '~7.5 hrs', driveNote: 'est.', zones: ['TX', 'TX'],
+    wx: { label: 'Lubbock', lat: 33.5779, lon: -101.8552, tz: 'America/Chicago' },
+    route: [[35.2220, -101.8313], [33.5779, -101.8552], [31.4638, -100.4370], [30.2672, -97.7431]],
     plan: [
-      ['Morning', 'Drive the Badlands Loop Road through Badlands National Park: striped buttes, bighorn sheep and prairie dog towns. The boardwalk Fossil Exhibit Trail is perfect for kids.'],
-      ['Midday', 'Optional: Wall Drug for free ice water and a giant jackalope, or the Minuteman Missile site.'],
-      ['Afternoon', 'South through the Nebraska Sandhills via Valentine. You lose an hour entering Central Time.'],
-      ['Evening', 'Overnight in North Platte.']
-    ],
-    stops: [
-      { name: 'Badlands National Park (Ben Reifel Visitor Center)', lat: 43.7497, lon: -101.9405, kind: 'main', url: 'https://www.nps.gov/badl/',
-        note: 'Little shade and big drop-offs: bring water and hats, and keep kids close at overlooks.' },
-      { name: 'Wall Drug', lat: 43.9925, lon: -102.2416, kind: 'optional' },
-      { name: 'Minuteman Missile National Historic Site', lat: 43.8800, lon: -101.9600, kind: 'optional', url: 'https://www.nps.gov/mimi/' },
-      { name: 'Valentine (lunch)', lat: 42.8728, lon: -100.5510, kind: 'stretch' }
-    ],
-    hotels: {
-      area: 'North Platte, on I-80',
-      options: [
-        { name: 'Hotels in North Platte', q: 'hotels North Platte NE' }
-      ]
-    },
-    flags: []
-  },
-  {
-    n: 12, title: 'North Platte to Wichita', color: '#1d4ed8',
-    drive: '~6 hrs', driveNote: 'est.', zones: ['NEC', 'KS'],
-    wx: { label: 'Wichita', lat: 37.6872, lon: -97.3301, tz: 'America/Chicago' },
-    route: [[41.1239, -100.7654], [40.2022, -100.6254], [38.8792, -99.3268], [38.0650, -97.9180], [37.6872, -97.3301]],
-    plan: [
-      ['Morning', 'South across the Kansas plains.'],
-      ['Optional', 'Monument Rocks, 70-foot chalk pyramids rising out of the prairie (a gravel-road detour of about 1.5 hours).'],
-      ['Afternoon', 'Cosmosphere in Hutchinson: real spacecraft, including Apollo 13’s command module.'],
-      ['Evening', 'On to Wichita.']
-    ],
-    stops: [
-      { name: 'Monument Rocks', lat: 38.7939, lon: -100.7631, kind: 'optional', note: 'On private land open to visitors. Respect the fences, and skip it after heavy rain.' },
-      { name: 'Hays (lunch)', lat: 38.8792, lon: -99.3268, kind: 'stretch' },
-      { name: 'Cosmosphere', lat: 38.0650, lon: -97.9180, kind: 'main', url: 'https://cosmo.org/' }
-    ],
-    hotels: {
-      area: 'Wichita',
-      options: [
-        { name: 'Family hotels in Wichita', q: 'family hotels Wichita KS' }
-      ]
-    },
-    flags: []
-  },
-  {
-    n: 13, title: 'Wichita to Austin', color: '#0e7490',
-    drive: '~7.5 hrs', driveNote: 'est.', zones: ['KS', 'TX'],
-    wx: { label: 'Waco', lat: 31.5493, lon: -97.1467, tz: 'America/Chicago' },
-    route: [[37.6872, -97.3301], [35.4676, -97.5164], [34.1743, -97.1436], [32.7555, -97.3308], [31.6066, -97.1764], [30.2672, -97.7431]],
-    plan: [
-      ['Morning', 'South on I-35 into Oklahoma.'],
-      ['Optional', 'Oklahoma City National Memorial, or Turner Falls in the Arbuckle Mountains, for a stretch.'],
-      ['Afternoon', 'Waco Mammoth National Monument: a dig site with Columbian mammoths still in the ground.'],
+      ['Morning', 'If you skipped it on day 1, Palo Duro Canyon is a 30-minute detour for an early walk.'],
+      ['Midday', 'South through Lubbock.'],
+      ['Afternoon', 'Through San Angelo and the Hill Country.'],
       ['Evening', 'Arrive in Austin.']
     ],
     stops: [
-      { name: 'Oklahoma City National Memorial', lat: 35.4731, lon: -97.5171, kind: 'optional' },
-      { name: 'Turner Falls Park', lat: 34.4243, lon: -97.1467, kind: 'optional' },
-      { name: 'Waco Mammoth National Monument', lat: 31.6066, lon: -97.1764, kind: 'main', url: 'https://www.nps.gov/waco/',
-        note: 'Guided tours of the dig shelter run about every 30 minutes.' }
+      { name: 'Palo Duro Canyon State Park', lat: 34.9842, lon: -101.7027, kind: 'optional', url: 'https://tpwd.texas.gov/state-parks/palo-duro-canyon' },
+      { name: 'Lubbock (lunch)', lat: 33.5779, lon: -101.8552, kind: 'stretch' }
     ],
     hotels: null,
     flags: []
@@ -368,12 +285,9 @@ window.DAYS = [
 ];
 
 window.CHECKLIST = [
-  { id: 'ys-lodging', text: 'Book Yellowstone lodging first (nights 6 and 7): in-park rooms open about 13 months ahead and sell out.' },
-  { id: 'rmnp-entry', text: 'Get a Rocky Mountain National Park timed-entry reservation on recreation.gov for days 3 and 4.' },
-  { id: 'teton', text: 'Book Jackson or Teton Village (night 5). Summer prices climb fast.' },
-  { id: 'pass', text: 'Buy an America the Beautiful annual pass: it covers Rocky Mountain, Grand Teton, Yellowstone, Badlands and the national monuments on this route.' },
-  { id: 'windcave', text: 'Reserve a Wind Cave tour on recreation.gov for day 10.' },
-  { id: 'custer', text: 'Buy a Custer State Park entrance license (state parks are not covered by the national pass).' },
+  { id: 'ys-lodging', text: 'Book Yellowstone lodging first (nights 5 and 6): in-park rooms open about 13 months ahead and sell out.' },
+  { id: 'teton', text: 'Book Jackson or Teton Village (night 4). Summer prices climb fast.' },
+  { id: 'pass', text: 'Buy an America the Beautiful annual pass: it covers Grand Teton, Yellowstone, Capulin Volcano and the historic sites on this route.' },
   { id: 'roads', text: 'Check the NPS Yellowstone park roads page the week before you leave.' },
   { id: 'bear', text: 'Buy bear spray in Jackson or at the park stores (you can’t fly with it, but you can drive with it).' },
   { id: 'hotels-rest', text: 'Book the remaining hotels with free cancellation.' },
@@ -381,13 +295,14 @@ window.CHECKLIST = [
 ];
 
 window.PACKING = [
-  'Warm layers, hats and gloves: mornings can be near freezing in Yellowstone and on Trail Ridge Road, even in July',
+  'Warm layers, hats and gloves: mornings can be near freezing in Yellowstone, even in July',
   'Rain jackets for afternoon mountain thunderstorms',
-  'Binoculars for Hayden Valley and Custer State Park wildlife',
-  'Stroller for the geyser boardwalks; a child carrier for Hidden Falls and the Wind Cave tour (no strollers)',
+  'Binoculars for Hayden Valley and Grand Teton wildlife',
+  'Stroller for the geyser boardwalks; a child carrier for the Hidden Falls trail',
   'Sunscreen and sunglasses: the sun is strong at high altitude',
-  'Refillable water bottles and car snacks; services are far apart in Wyoming and Nebraska',
+  'Refillable water bottles and car snacks; services are far apart in Wyoming and eastern Colorado',
   'Car activities: a tablet with downloaded shows, audiobooks, and road-trip games',
+  'Swimsuits for the free hot springs bathhouse in Thermopolis',
   'Small first-aid kit, any medicines, and motion-sickness bands for mountain roads',
   'National park pass, and a Junior Ranger booklet for each park'
 ];

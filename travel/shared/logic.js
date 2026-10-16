@@ -173,6 +173,7 @@
     if (w.tmax != null && w.tmax >= 90) out.push('Hot afternoon: do outdoor stops early or late, with shade and extra water.');
     if (has('beach') && (gust >= 25 || pop >= 60)) out.push('Rough beach day possible: check the beach flags (red means dangerous surf and rip currents; double red means the water is closed).');
     if (has('boat') && gust >= 25) out.push('Breezy on the water: boat tours and ferries can be rough or cancelled. Confirm with the operator that morning.');
+    if (has('wind') && gust >= 40) out.push('Very strong gusts forecast: skip exposed ridges and high trails today, and stick to sheltered canyon walks.');
     if (has('alpine') && w.tmax != null && w.tmax <= 50) out.push('High-elevation stop: it will be much colder up top than in town. Bring jackets even in summer.');
     if (!has('slot') && pop >= 50) out.push('Rain likely: keep the backup plan for this day in mind.');
     if (w.code === 95 || w.code === 96 || w.code === 99) out.push('Thunderstorms possible: stay off exposed overlooks and rim edges when you hear thunder.');
@@ -219,6 +220,19 @@
       else out.push('Manatees are mostly offshore this time of year, so sightings at the springs are hit or miss.');
     }
     if (has('spring-break') && m === 3) out.push('Spring break: expect crowds and higher prices. Book rooms early.');
+    if (has('desert-heat') && m >= 5 && m <= 9) out.push('Desert heat: low trails can pass 100°F. Hike before 10 AM, rest in the shade or at higher elevations midday, and carry a gallon of water per person.');
+    if (has('monsoon') && m >= 7 && m <= 9) out.push('Monsoon season: afternoon thunderstorms are common. Do canyons and exposed overlooks in the morning, and never enter a wash or canyon when storms are near.');
+    if (has('bats')) {
+      if ((m === 5 && day >= 20) || (m >= 6 && m <= 10)) out.push('Bat Flight season: the free ranger program starts near sunset at the cave’s amphitheater. Electronics must be off: no phones or cameras.');
+      else out.push('The bats are wintering in Mexico, so there is no Bat Flight program on these dates.');
+    }
+    if (has('medano')) {
+      if ((m === 5 && day >= 15) || m === 6) out.push('Medano Creek should be flowing: bring water shoes and towels for splashing at the base of the dunes.');
+      else if (m === 7 || m === 8) out.push('Medano Creek is usually low or dry by now, and the sand can reach 150°F in the afternoon. Climb the dunes early, in closed-toe shoes.');
+    }
+    if (has('mesaverde') && (m <= 4 || m >= 11)) out.push('Off-season at Mesa Verde: ranger-led cliff dwelling tours are limited or not running, and some mesa roads close. Overlooks of the cliff dwellings are still open.');
+    if (has('aspen') && ((m === 9 && day >= 15) || (m === 10 && day <= 10))) out.push('Aspen season: the San Juan Mountains turn gold around now. Expect leaf-peeper traffic on US-550.');
+    if (has('bandelier') && m >= 5 && m <= 10) out.push('At Bandelier in summer, daytime visitors usually have to ride the free shuttle from the White Rock Visitor Center. Check the NPS site for the shuttle season.');
     if (has('kuwohi') && (m === 12 || m <= 3)) out.push('Kuwohi Road is closed to cars from Dec 1 through Mar 31. Newfound Gap Road usually stays open, but can close for snow and ice.');
     if (has('cades') && m >= 5 && m <= 9 && d.getUTCDay() === 3) out.push('It’s a Wednesday: Cades Cove Loop Road is closed to cars today (open to walkers and bikes). Swap this day with the day before, or bike the loop.');
     if (has('fall-color') && m === 10) out.push('Fall-color season: expect the year’s heaviest traffic in Gatlinburg, Cades Cove and Newfound Gap Road, especially on weekends. Start at sunrise.');

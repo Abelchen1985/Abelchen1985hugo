@@ -137,13 +137,16 @@
   .bt-small .bt-note{ margin:2px 0 0; font-size:.85rem; opacity:.85 }
   .bt-small svg:first-child{ position:absolute; top:24px; left:26px }
   .bt-small .bt-go{ position:absolute; top:24px; right:24px; left:auto; transition:transform .25s ease }
-  .bt-ball{ background:linear-gradient(135deg,#c2663d,#8f3b22) }
+  .bt-ball{ background:radial-gradient(circle at 85% 20%, rgba(206,17,65,.45), transparent 55%), linear-gradient(135deg,#232022,#0f0d0e) }
+  .bt-jersey{ position:absolute; top:14px; right:16px; width:clamp(64px,30%,86px); height:auto; transform:rotate(8deg); filter:drop-shadow(0 6px 10px rgba(0,0,0,.45)); transition:transform .3s ease }
+  .bt-ball:hover .bt-jersey{ transform:rotate(0deg) scale(1.05) }
+  @media (prefers-reduced-motion:reduce){ .bt-jersey{ transition:none } }
   .bt-film{ background:linear-gradient(135deg,#3b4a5a,#1f2a35) }
   .bt-travel{ background:linear-gradient(180deg, rgba(14,13,10,.1), rgba(14,13,10,.7)), url("yosemite.jpg") center / cover }
   .bt-study{ background:linear-gradient(135deg,#5d6f4b,#3a4730) }
   .bt-cv{ background:linear-gradient(135deg,#8a6a2f,#5a4318) }
   .bt-pair{ grid-column:span 5; display:grid; grid-template-columns:1fr 1fr; gap:16px }
-  .bt-pair .bt-small{ grid-column:auto !important; min-height:200px }
+  .bt-pair .bt-small{ grid-column:auto !important; min-height:220px }
   .bt-pair .bt-small .bt-name{ font-size:1.3rem }
 
   @media (max-width:900px){
@@ -466,7 +469,15 @@
       </div>
 
       <div class="bt-pair">
-      <div class="bt-tile bt-small bt-half bt-ball"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18M5.6 5.6c2.8 2.8 2.8 10 0 12.8M18.4 5.6c-2.8 2.8-2.8 10 0 12.8"/></svg><p class="bt-name">Basketball</p><p class="bt-note">Weekend hoops</p></div>
+      <div class="bt-tile bt-small bt-half bt-ball"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18M5.6 5.6c2.8 2.8 2.8 10 0 12.8M18.4 5.6c-2.8 2.8-2.8 10 0 12.8"/></svg>
+        <!-- MJ tribute: a drawn #23 jersey (back view), no team logos -->
+        <svg class="bt-jersey" viewBox="0 0 100 112" role="img" aria-label="Red number 23 Jordan jersey, a tribute to Michael Jordan">
+          <path d="M30 4 H42 Q50 11 58 4 H70 L72 22 Q74 34 88 38 V104 Q50 110 12 104 V38 Q26 34 28 22 Z" fill="#ce1141" stroke="#111" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M33 7 H41 Q50 15 59 7 H67 L69 23 Q71 36 84 41 M16 41 Q29 36 31 23 L33 7" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"/>
+          <text x="50" y="52" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-weight="800" font-size="11" letter-spacing="1.5" fill="#fff" stroke="#111" stroke-width=".8" paint-order="stroke">JORDAN</text>
+          <text x="50" y="94" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-weight="800" font-size="40" fill="#fff" stroke="#111" stroke-width="2" paint-order="stroke">23</text>
+        </svg>
+        <p class="bt-name">Basketball</p><p class="bt-note">Weekend hoops · MJ #23 fan</p></div>
       <div class="bt-tile bt-small bt-half bt-film"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18M8 5v4M16 5v4"/></svg><p class="bt-name">Movies</p><p class="bt-note">Always a watchlist</p></div>
       </div>
 

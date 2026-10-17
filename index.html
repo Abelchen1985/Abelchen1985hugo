@@ -290,6 +290,63 @@
   #travel a{ color:var(--teal) }
   #travel{ color:var(--ink) }
 
+  /* ---- travel weather ---- */
+  #travel .wx{ background:var(--card); border:1px solid var(--border); border-radius:18px; box-shadow:var(--shadow); padding:26px 26px 18px; margin-bottom:40px }
+  #travel .wx-head{ display:flex; justify-content:space-between; align-items:flex-start; gap:12px 20px; flex-wrap:wrap }
+  #travel .wx h2{ font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:1.5rem; margin:0 0 6px; display:flex; gap:10px; align-items:baseline }
+  #travel .wx h2 .script{ color:var(--teal); font-size:1.5rem }
+  #travel .wx-sub{ color:var(--muted); margin:0; max-width:60ch; font-size:.95rem }
+  #travel .wx-unit{ display:inline-flex; border:1px solid var(--border); border-radius:999px; overflow:hidden }
+  #travel .wx-unit button{ border:0; background:transparent; color:var(--muted); font:inherit; font-size:.85rem; font-weight:600; padding:6px 12px; cursor:pointer }
+  #travel .wx-unit button[aria-pressed="true"]{ background:var(--teal); color:var(--card) }
+  #travel .wx-places{ display:flex; flex-wrap:wrap; gap:8px; margin:16px 0 10px }
+  #travel .wx-chip{ border:1px solid var(--border); background:transparent; color:var(--ink); font:inherit; font-size:.85rem; border-radius:999px; padding:6px 12px; cursor:pointer }
+  #travel .wx-chip:hover{ border-color:var(--teal) }
+  #travel .wx-chip[aria-pressed="true"]{ background:var(--teal); border-color:var(--teal); color:var(--card); font-weight:600 }
+  #travel .wx-search{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:6px }
+  #travel .wx-search input{ flex:1 1 200px; min-width:0; border:1px solid var(--border); background:var(--board); color:var(--ink); font:inherit; font-size:.92rem; border-radius:10px; padding:8px 12px }
+  #travel .wx-btn{ border:1px solid var(--border); background:var(--card); color:var(--ink); font:inherit; font-size:.88rem; border-radius:10px; padding:8px 14px; cursor:pointer }
+  #travel .wx-btn.primary{ background:var(--teal); border-color:var(--teal); color:var(--card); font-weight:600 }
+  #travel .wx-results{ list-style:none; margin:4px 0 8px; padding:0; display:flex; flex-wrap:wrap; gap:6px }
+  #travel .wx-status{ color:var(--muted); font-size:.88rem; min-height:1.3em; margin:6px 0 0 }
+  #travel .wx-now{ display:grid; grid-template-columns:auto 1fr; gap:6px 22px; align-items:center; background:var(--board); border-radius:14px; padding:16px 18px; margin:12px 0 14px }
+  #travel .wx-now-main{ display:flex; align-items:center; gap:12px }
+  #travel .wx-now-icon{ font-size:2.6rem; line-height:1 }
+  #travel .wx-now-temp{ font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:2.6rem; line-height:1 }
+  #travel .wx-now-place{ font-weight:700; font-size:1.05rem }
+  #travel .wx-now-facts{ display:flex; flex-wrap:wrap; gap:4px 18px; color:var(--muted); font-size:.88rem }
+  #travel .wx-now-facts b{ color:var(--ink); font-weight:600 }
+  #travel .wx-tips{ margin:0 0 14px; padding:0; list-style:none; display:grid; gap:6px }
+  #travel .wx-tips li{ border-left:3px solid var(--mustard); background:var(--board); border-radius:0 10px 10px 0; padding:7px 12px; font-size:.9rem }
+  #travel .wx-days{ list-style:none; margin:0; padding:0 }
+  #travel .wx-day{ display:grid; grid-template-columns:6.6em minmax(8.5em,1.1fr) minmax(9em,1.3fr) 4em 7.2em 10.5em; gap:10px; align-items:center; padding:9px 4px; border-top:1px solid var(--border); font-size:.9rem }
+  #travel .wx-d b{ display:block } #travel .wx-d span{ color:var(--muted); font-size:.8rem }
+  #travel .wx-cond{ display:flex; align-items:center; gap:8px } #travel .wx-cond i{ font-style:normal; font-size:1.35rem }
+  #travel .wx-temps{ display:grid; grid-template-columns:2.6em 1fr 2.6em; gap:8px; align-items:center }
+  #travel .wx-temps .lo{ color:var(--muted); text-align:right } #travel .wx-temps .hi{ font-weight:700 }
+  #travel .wx-bar{ position:relative; height:6px; border-radius:6px; background:var(--dot) }
+  #travel .wx-bar i{ position:absolute; top:0; bottom:0; border-radius:6px; background:linear-gradient(90deg,#4f9ad6,#e3ac5b 60%,#d9622b) }
+  #travel .wx-rain{ color:#2f7fbf; font-weight:600 }
+  #travel .wx-uv{ display:inline-block; border-radius:999px; padding:1px 8px; font-size:.78rem; font-weight:700; white-space:nowrap }
+  #travel .uv-low{ background:#dcefd9; color:#1f5a1c } #travel .uv-mod{ background:#fff1c7; color:#6e4b00 }
+  #travel .uv-high{ background:#ffe0c2; color:#8a3e00 } #travel .uv-vhigh{ background:#ffd0d0; color:#9a1b1b } #travel .uv-ext{ background:#ead7f5; color:#5b1f84 }
+  #travel .wx-wind{ color:var(--muted); font-size:.85rem; white-space:nowrap }
+  #travel .wx-wind b{ color:var(--ink); font-weight:600 }
+  #travel .wx-foot{ color:var(--muted); font-size:.78rem; margin:12px 0 0 }
+  @media (prefers-color-scheme: dark){
+    #travel .wx-rain{ color:#7cc0f0 }
+    #travel .uv-low{ background:#20391f; color:#a8dba0 } #travel .uv-mod{ background:#3a3110; color:#f2d47a }
+    #travel .uv-high{ background:#40260f; color:#f5b678 } #travel .uv-vhigh{ background:#45181a; color:#f59a9a } #travel .uv-ext{ background:#33203f; color:#d3a8f0 }
+  }
+  @media (max-width:760px){
+    #travel .wx{ padding:18px 14px 12px }
+    #travel .wx-now{ grid-template-columns:1fr }
+    #travel .wx-day{ grid-template-columns:5.6em 1fr; grid-template-areas:"d c" "d t" "x x"; gap:4px 10px }
+    #travel .wx-d{ grid-area:d } #travel .wx-cond{ grid-area:c } #travel .wx-temps{ grid-area:t }
+    #travel .wx-extra{ grid-area:x; display:flex; flex-wrap:wrap; gap:4px 14px; font-size:.82rem }
+  }
+  @media (min-width:761px){ #travel .wx-extra{ display:contents } }
+
   /* ---- cv ---- */
   #cv .sec-inner{ max-width:820px }
 #cv .head{ padding:28px 0 40px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:flex-end; gap:20px; flex-wrap:wrap }
@@ -498,6 +555,32 @@
   <!-- Trip groups are placeholders — tell me your actual trips (place + rough date) and photos, and I'll replace this with the real thing. -->
 
   <div class="add-note" style="margin-bottom:22px"><strong>Road trip planners:</strong> <a href="travel/">Southwest, Big Bend, Colorado, Yellowstone, Destin, and the Great Smoky Mountains, with national parks and the best season for each →</a></div>
+
+  <!-- Travel weather: live 10-day forecast (script near the end of the page; edit PLACES there to change the quick picks) -->
+  <div class="wx" id="wx">
+    <div class="wx-head">
+      <div>
+        <h2>Travel weather <span class="script">next 10 days</span></h2>
+        <p class="wx-sub">Live forecast for my trip spots, or search any city.</p>
+      </div>
+      <div class="wx-unit" role="group" aria-label="Temperature units">
+        <button type="button" data-unit="F" aria-pressed="true">°F</button>
+        <button type="button" data-unit="C" aria-pressed="false">°C</button>
+      </div>
+    </div>
+    <div class="wx-places" id="wx-places" role="group" aria-label="Quick places"></div>
+    <form class="wx-search" id="wx-search" role="search">
+      <input type="search" id="wx-q" placeholder="Search a city or park, e.g. Moab" aria-label="Search a place" autocomplete="off">
+      <button type="submit" class="wx-btn primary">Search</button>
+      <button type="button" class="wx-btn" id="wx-geo">Use my location</button>
+    </form>
+    <ul class="wx-results" id="wx-results"></ul>
+    <p class="wx-status" id="wx-status" role="status" aria-live="polite"></p>
+    <div id="wx-now"></div>
+    <ul class="wx-tips" id="wx-tips"></ul>
+    <ol class="wx-days" id="wx-days" aria-label="10-day forecast"></ol>
+    <p class="wx-foot">Weather data by <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a> (CC BY 4.0). Forecasts change; check again before you leave.</p>
+  </div>
 
     <!-- National Parks map: red = parks with a photo in this album (edit NP_VISITED in the script below to add more) -->
   <div class="np" id="np">
@@ -1140,6 +1223,255 @@
   document.addEventListener('keydown',function(e){
     if((e.ctrlKey||e.metaKey) && (e.key==='s'||e.key==='S') && document.activeElement && document.activeElement.closest && document.activeElement.closest(SEL)) e.preventDefault();
   });
+})();
+</script>
+<script>
+/* Travel weather: live current conditions + 10-day forecast from Open-Meteo (free, no API key).
+   Loads only when the Travel tab is opened. Edit PLACES to change the quick-pick buttons. */
+(function(){
+  var box=document.getElementById('wx'); if(!box) return;
+  var PLACES=[
+    {name:'Austin, TX', lat:30.2672, lon:-97.7431},
+    {name:'Big Bend NP', lat:29.3277, lon:-103.2063},
+    {name:'Grand Canyon South Rim', lat:36.0544, lon:-112.1401},
+    {name:'White Sands NP', lat:32.7797, lon:-106.1717},
+    {name:'Great Sand Dunes NP', lat:37.7326, lon:-105.5121},
+    {name:'Mesa Verde NP', lat:37.1840, lon:-108.4890},
+    {name:'Yellowstone (Old Faithful)', lat:44.4605, lon:-110.8281},
+    {name:'Grand Teton NP', lat:43.7904, lon:-110.6818},
+    {name:'Destin, FL', lat:30.3935, lon:-86.4958},
+    {name:'Gatlinburg (Smokies)', lat:35.7143, lon:-83.5102}
+  ];
+  var DAYS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var COMPASS=['N','NE','E','SE','S','SW','W','NW'];
+  function $(id){ return document.getElementById(id); }
+  function el(tag, cls, text){ var n=document.createElement(tag); if(cls) n.className=cls; if(text!=null) n.textContent=text; return n; }
+  function clear(n){ while(n.firstChild) n.removeChild(n.firstChild); }
+  function lsGet(k){ try{ return JSON.parse(localStorage.getItem(k)); }catch(e){ return null; } }
+  function lsSet(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+
+  var saved=lsGet('wx-place');
+  var state={
+    place: saved && typeof saved.lat==='number' && typeof saved.lon==='number' && saved.name ? saved : PLACES[1],
+    unit: lsGet('wx-unit')==='C' ? 'C' : 'F',
+    loaded:false, req:0
+  };
+
+  function cond(code, day){
+    if(code===0) return ['☀️', day===false ? 'Clear' : 'Sunny'];
+    if(code===1) return ['🌤️','Mostly sunny'];
+    if(code===2) return ['⛅','Partly cloudy'];
+    if(code===3) return ['☁️','Cloudy'];
+    if(code===45||code===48) return ['🌫️','Fog'];
+    if(code>=51&&code<=57) return ['🌦️','Drizzle'];
+    if(code>=61&&code<=67) return ['🌧️', code>=65 ? 'Heavy rain' : 'Rain'];
+    if(code>=71&&code<=77) return ['🌨️','Snow'];
+    if(code>=80&&code<=82) return ['🌦️','Showers'];
+    if(code===85||code===86) return ['🌨️','Snow showers'];
+    if(code===95) return ['⛈️','Thunderstorms'];
+    if(code===96||code===99) return ['⛈️','Storms, hail'];
+    return ['❓','Unknown'];
+  }
+  function uvInfo(u){
+    if(u==null) return ['–',''];
+    var r=Math.round(u);
+    if(r<=2) return [r+' Low','uv-low'];
+    if(r<=5) return [r+' Moderate','uv-mod'];
+    if(r<=7) return [r+' High','uv-high'];
+    if(r<=10) return [r+' Very high','uv-vhigh'];
+    return [r+' Extreme','uv-ext'];
+  }
+  function dir(d){ return d==null ? '' : COMPASS[Math.round(d/45)%8]; }
+  function t(v){ return v==null ? '–' : Math.round(v)+'°'; }
+  function clock(iso){
+    var m=/T(\d{2}):(\d{2})/.exec(iso||''); if(!m) return '–';
+    var h=+m[1], ap=h>=12?'PM':'AM'; return (h%12||12)+':'+m[2]+' '+ap;
+  }
+  function dayLabel(iso, i){
+    var p=iso.split('-'), d=new Date(Date.UTC(+p[0],+p[1]-1,+p[2]));
+    return [i===0?'Today':i===1?'Tomorrow':DAYS[d.getUTCDay()], MONTHS[d.getUTCMonth()]+' '+d.getUTCDate()];
+  }
+  function speedUnit(){ return state.unit==='C' ? 'km/h' : 'mph'; }
+
+  function url(p){
+    var c=state.unit==='C';
+    return 'https://api.open-meteo.com/v1/forecast?latitude='+p.lat.toFixed(4)+'&longitude='+p.lon.toFixed(4)+
+      '&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,wind_speed_10m,wind_gusts_10m,wind_direction_10m,uv_index,is_day'+
+      '&daily=weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_probability_max,precipitation_sum,uv_index_max,wind_speed_10m_max,wind_gusts_10m_max,wind_direction_10m_dominant,sunrise,sunset'+
+      (c ? '' : '&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch')+
+      '&timezone=auto&forecast_days=10';
+  }
+
+  function setStatus(msg, retry){
+    var s=$('wx-status'); clear(s); if(!msg) return;
+    s.appendChild(document.createTextNode(msg+' '));
+    if(retry){ var b=el('button','wx-btn','Retry'); b.type='button'; b.onclick=retry; s.appendChild(b); }
+  }
+
+  function renderPlaces(){
+    var wrap=$('wx-places'); clear(wrap);
+    PLACES.forEach(function(p){
+      var b=el('button','wx-chip',p.name); b.type='button';
+      b.setAttribute('aria-pressed', String(state.place.lat===p.lat && state.place.lon===p.lon));
+      b.onclick=function(){ choose(p); };
+      wrap.appendChild(b);
+    });
+    box.querySelectorAll('.wx-unit button').forEach(function(b){ b.setAttribute('aria-pressed', String(b.getAttribute('data-unit')===state.unit)); });
+  }
+
+  function choose(p){
+    state.place={name:p.name, lat:p.lat, lon:p.lon};
+    lsSet('wx-place', state.place);
+    clear($('wx-results'));
+    renderPlaces(); load();
+  }
+
+  function load(){
+    var p=state.place, key=p.lat.toFixed(3)+','+p.lon.toFixed(3)+','+state.unit, my=++state.req;
+    var cache=lsGet('wx-cache');
+    if(cache && cache.key===key && Date.now()-cache.t < 30*60*1000 && cache.data){ render(cache.data); return; }
+    setStatus('Loading the forecast for '+p.name+'…');
+    var ctrl=typeof AbortController==='function' ? new AbortController() : null;
+    var timer=setTimeout(function(){ if(ctrl) ctrl.abort(); }, 15000);
+    fetch(url(p), ctrl ? {signal:ctrl.signal} : undefined)
+      .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+      .then(function(json){
+        if(my!==state.req) return;
+        if(!json || !json.daily || !Array.isArray(json.daily.time)) throw new Error('unexpected response');
+        lsSet('wx-cache', {key:key, t:Date.now(), data:json});
+        render(json);
+      })
+      .catch(function(e){ if(my!==state.req) return; setStatus('Couldn’t load the forecast ('+((e&&e.name==='AbortError')?'timed out':(e&&e.message)||'network error')+').', load); })
+      .then(function(){ clearTimeout(timer); });
+  }
+
+  function render(json){
+    setStatus('');
+    var cur=json.current||{}, d=json.daily, n=d.time.length, su=speedUnit();
+    function at(k,i){ return d[k] && d[k][i]!=null ? d[k][i] : null; }
+
+    // current conditions
+    var now=$('wx-now'); clear(now);
+    var c=cond(cur.weather_code, cur.is_day!==0);
+    var card=el('div','wx-now');
+    var main=el('div','wx-now-main');
+    main.appendChild(el('span','wx-now-icon',c[0]));
+    main.appendChild(el('span','wx-now-temp',t(cur.temperature_2m)));
+    var right=el('div');
+    right.appendChild(el('div','wx-now-place',state.place.name+' · '+c[1]));
+    var facts=el('div','wx-now-facts');
+    function fact(label,val){ var s=el('span'); s.appendChild(document.createTextNode(label+' ')); s.appendChild(el('b',null,val)); facts.appendChild(s); }
+    fact('Feels like', t(cur.apparent_temperature));
+    fact('Humidity', cur.relative_humidity_2m==null?'–':Math.round(cur.relative_humidity_2m)+'%');
+    fact('Wind', cur.wind_speed_10m==null?'–':(dir(cur.wind_direction_10m)+' '+Math.round(cur.wind_speed_10m)+' '+su+(cur.wind_gusts_10m!=null?', gusts '+Math.round(cur.wind_gusts_10m):'')));
+    fact('UV now', uvInfo(cur.uv_index)[0]);
+    fact('Sunrise', clock(at('sunrise',0)));
+    fact('Sunset', clock(at('sunset',0)));
+    right.appendChild(facts);
+    right.appendChild(el('div','wx-now-facts','Local time '+clock(cur.time)+' ('+(json.timezone_abbreviation||json.timezone||'local')+')'));
+    card.appendChild(main); card.appendChild(right); now.appendChild(card);
+
+    // 10-day rows
+    var lo=Infinity, hi=-Infinity;
+    for(var i=0;i<n;i++){ var a=at('temperature_2m_min',i), b=at('temperature_2m_max',i); if(a!=null&&a<lo) lo=a; if(b!=null&&b>hi) hi=b; }
+    var span=Math.max(1, hi-lo);
+    var list=$('wx-days'); clear(list);
+    for(var j=0;j<n;j++){
+      var row=el('li','wx-day'), lab=dayLabel(d.time[j], j), cc=cond(at('weather_code',j), true);
+      var dd=el('div','wx-d'); dd.appendChild(el('b',null,lab[0])); dd.appendChild(el('span',null,lab[1])); row.appendChild(dd);
+      var cd=el('div','wx-cond'); cd.appendChild(el('i',null,cc[0])); cd.appendChild(el('span',null,cc[1])); row.appendChild(cd);
+      var tmin=at('temperature_2m_min',j), tmax=at('temperature_2m_max',j);
+      var tp=el('div','wx-temps'); tp.setAttribute('aria-label','Low '+t(tmin)+', high '+t(tmax));
+      tp.appendChild(el('span','lo',t(tmin)));
+      var bar=el('span','wx-bar'), fill=el('i');
+      if(tmin!=null&&tmax!=null){ fill.style.left=((tmin-lo)/span*100)+'%'; fill.style.right=((hi-tmax)/span*100)+'%'; }
+      bar.appendChild(fill); tp.appendChild(bar);
+      tp.appendChild(el('span','hi',t(tmax)));
+      row.appendChild(tp);
+      var ex=el('div','wx-extra');
+      var pop=at('precipitation_probability_max',j), rain=el('span','wx-rain','💧 '+(pop==null?'–':Math.round(pop)+'%'));
+      rain.title='Chance of rain'+(at('precipitation_sum',j)?', about '+at('precipitation_sum',j)+(state.unit==='C'?' mm':' in'):'');
+      ex.appendChild(rain);
+      var uv=uvInfo(at('uv_index_max',j)), ub=el('span'), u=el('span','wx-uv '+uv[1],'UV '+uv[0]); ub.appendChild(u); ex.appendChild(ub);
+      var w=el('span','wx-wind'); w.appendChild(document.createTextNode('💨 '));
+      w.appendChild(el('b',null,(dir(at('wind_direction_10m_dominant',j))+' '+(at('wind_speed_10m_max',j)==null?'–':Math.round(at('wind_speed_10m_max',j)))).trim()));
+      w.appendChild(document.createTextNode(' '+su+(at('wind_gusts_10m_max',j)!=null?', gusts '+Math.round(at('wind_gusts_10m_max',j)):'')));
+      ex.appendChild(w);
+      row.appendChild(ex);
+      list.appendChild(row);
+    }
+
+    // travel tips from the forecast
+    var tips=[], F=state.unit!=='C';
+    function names(test){ var out=[]; for(var k=0;k<n;k++){ if(test(k)) out.push(dayLabel(d.time[k],k)[0]); } return out; }
+    function join(a){ return a.length<=3 ? a.join(', ') : a.slice(0,3).join(', ')+' and '+(a.length-3)+' more'; }
+    var wet=names(function(k){ return (at('precipitation_probability_max',k)||0)>=50; });
+    var storm=names(function(k){ var x=at('weather_code',k); return x===95||x===96||x===99; });
+    var uvHigh=names(function(k){ return (at('uv_index_max',k)||0)>=8; });
+    var windy=names(function(k){ return (at('wind_gusts_10m_max',k)||0)>=(F?35:56); });
+    var hot=names(function(k){ return (at('temperature_2m_max',k)||-99)>=(F?95:35); });
+    var freeze=names(function(k){ var x=at('temperature_2m_min',k); return x!=null && x<=(F?32:0); });
+    var snow=names(function(k){ var x=at('weather_code',k); return (x>=71&&x<=77)||x===85||x===86; });
+    if(storm.length) tips.push('⛈️ Thunderstorms possible '+join(storm)+': plan hikes and overlooks for the morning, and get off exposed ridges when you hear thunder.');
+    if(wet.length) tips.push('☔ Rain likely '+join(wet)+': pack rain jackets and have an indoor backup.');
+    if(snow.length) tips.push('🌨️ Snow in the forecast '+join(snow)+': check road conditions and closures before you drive.');
+    if(uvHigh.length) tips.push('🧴 Very high UV '+join(uvHigh)+': sunscreen, hats and sunglasses, and shade from about 11 AM to 3 PM.');
+    if(hot.length) tips.push('🥵 Hot days '+join(hot)+': do outdoor stops early or late and carry extra water.');
+    if(freeze.length) tips.push('🧤 Freezing nights '+join(freeze)+': pack warm layers, hats and gloves.');
+    if(windy.length) tips.push('💨 Strong gusts '+join(windy)+': hold onto little ones at overlooks, and expect boat tours or ferries to be rough.');
+    var swing=0; for(var q=0;q<n;q++){ var a1=at('temperature_2m_min',q), b1=at('temperature_2m_max',q); if(a1!=null&&b1!=null) swing=Math.max(swing,b1-a1); }
+    if(swing>=(F?30:17)) tips.push('🧥 Big day-to-night swings (up to '+Math.round(swing)+'°): dress in layers.');
+    if(!tips.length) tips.push('👍 No weather red flags in the next 10 days. Still check again before you leave.');
+    var tl=$('wx-tips'); clear(tl); tips.forEach(function(x){ tl.appendChild(el('li',null,x)); });
+  }
+
+  // search
+  $('wx-search').addEventListener('submit', function(e){
+    e.preventDefault();
+    var q=$('wx-q').value.trim(); if(q.length<2) return;
+    var res=$('wx-results'); clear(res); setStatus('Searching…');
+    fetch('https://geocoding-api.open-meteo.com/v1/search?count=6&language=en&format=json&name='+encodeURIComponent(q))
+      .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+      .then(function(j){
+        var rs=(j&&j.results)||[];
+        if(!rs.length){ setStatus('No places found for “'+q+'”. Try a nearby town.'); return; }
+        setStatus('Pick a place:');
+        rs.forEach(function(r){
+          var label=r.name+(r.admin1?', '+r.admin1:'')+(r.country_code&&r.country_code!=='US'?', '+r.country:'');
+          var li=el('li'), b=el('button','wx-chip',label); b.type='button';
+          b.onclick=function(){ $('wx-q').value=''; choose({name:label, lat:r.latitude, lon:r.longitude}); };
+          li.appendChild(b); res.appendChild(li);
+        });
+      })
+      .catch(function(){ setStatus('Search isn’t working right now. Try again in a moment.'); });
+  });
+
+  // my location (asks the browser for permission; coordinates stay in this browser)
+  $('wx-geo').addEventListener('click', function(){
+    if(!navigator.geolocation){ setStatus('Location isn’t available in this browser.'); return; }
+    setStatus('Finding your location…');
+    navigator.geolocation.getCurrentPosition(function(pos){
+      choose({name:'My location', lat:Math.round(pos.coords.latitude*100)/100, lon:Math.round(pos.coords.longitude*100)/100});
+    }, function(){ setStatus('Couldn’t get your location. You can search for a city instead.'); }, {timeout:10000, maximumAge:600000});
+  });
+
+  // units
+  box.querySelectorAll('.wx-unit button').forEach(function(b){
+    b.addEventListener('click', function(){
+      var u=b.getAttribute('data-unit'); if(u===state.unit) return;
+      state.unit=u; lsSet('wx-unit', u); renderPlaces(); load();
+    });
+  });
+
+  // only fetch once the Travel tab is actually open
+  function maybeLoad(){
+    if(state.loaded) return;
+    var v=document.getElementById('travel');
+    if(v && v.classList.contains('active')){ state.loaded=true; load(); }
+  }
+  renderPlaces();
+  window.addEventListener('hashchange', function(){ setTimeout(maybeLoad,0); });
+  setTimeout(maybeLoad,0);
 })();
 </script>
 <script>
